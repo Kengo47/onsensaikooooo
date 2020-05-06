@@ -1,0 +1,39 @@
+# docker-compose.ymlフォーマットのバージョン指定
+version: '3'
+services:
+  # Railsコンテナ定義
+  web:
+    # Dockerfileを使用してイメージをビルド
+    build: .
+    # コンテナ起動時のデフォルトコマンド
+    # ポート番号：3000
+    # バインドするIPアドレス：0.0.0.0
+    # ポート3000が来たらrailsサーバーが応答
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp:cached
+      # cachedは、コンテナからホストへの書き込みはすぐだが、ホストからコンテナへの書き込みは遅延が許可される
+    ports:
+      - "3000:3000"
+    # dbコンテナが先に起動するよう設定
+    depends_on:
+      - db
+    # コンテナを起動しっぱなしにできる
+    tty: true
+    # pryを使用してデバッグができるよう設定
+    stdin_open: true
+  # MySQLコンテナ定義
+  db:
+    # mysqlを使用してコンテナ作成
+    image: mysql:5.7
+    volumes:
+      - ./tmp/db:/var/lib/mysql
+    # ローカル環境とDocker環境のポートフォワーディングを設定
+    ports:
+      - "3306:3306"
+    # コンテナ内の環境変数を定義
+    environment:
+      # オプション。データベースの名前を指定
+      MYSQL_DATABASE: app_development
+      # MySQLにおけるスーパユーザのrootアカウントに設定するパスワードを指定
+      MYSQL_ROOT_PASSWORD: password
