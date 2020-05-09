@@ -9,7 +9,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:notice] = "投稿しました！"
-      redirect_to root_rul
+      redirect_to root_url
     else
       render 'posts/new'
     end
