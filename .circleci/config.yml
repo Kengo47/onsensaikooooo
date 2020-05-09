@@ -38,8 +38,11 @@ jobs:
 
       # Databse setup
       # database.ymlとdatabase.yml.ciを入れ替える
+      # いったん下記2行をコメントアウト
       - run: mv config/database.yml.ci config/database.yml
       - run: bundle exec rails db:create
+
+
       # - run: bundle exec rails db:schema:load
 
 # # rubocop
