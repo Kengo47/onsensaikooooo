@@ -24,6 +24,7 @@
 #
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
+  mount_uploader :picture, PictureUploader
   validates :name, presence: true, length: { maximum: 10 }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
