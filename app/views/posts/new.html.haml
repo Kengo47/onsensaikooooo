@@ -1,2 +1,11 @@
-%h1 Posts#new
-%p Find me in app/views/posts/new.html.haml
+%h1 新規投稿
+= form_for(@post) do |f|
+  = f.label :title
+  %br
+  = f.text_field :title
+  %br
+  = f.file_field :picture, accept: 'image/jpeg,image/gif,image/png'
+  %br
+  = f.text_area :body, placeholder: 'このJunkに関する思い出やエピソードを記入しよう！'
+  %br
+  = f.submit 'コレクションに加える！'
