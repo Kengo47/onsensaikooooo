@@ -5,6 +5,8 @@
     %li
       = post.title
       = post.body
+      - if post.image.attached?
+        = image_tag post.image.variant(resize: '200x200').processed, class: "image"
 
 .stats
   %strong#following
@@ -15,3 +17,8 @@
   フォロワー
 
 = render 'follow_form'
+
+- if @user.avatar.attached?
+  = image_tag @user.avatar.variant(resize: '300x300').processed, class: "avatar"
+- else
+  = image_tag ("no_image.png"), class: "avatar"
