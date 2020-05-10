@@ -1,8 +1,17 @@
 = @user.name
-= link_to "アカウント編集", edit_user_registration_path
 %h2 あなたの投稿
 %ul
   - @user_posts.each do |post|
     %li
       = post.title
       = post.body
+
+.stats
+  %strong#following
+    = @user.following.count
+  フォロー中
+  %strong#followers
+    = @user.followers.count
+  フォロワー
+
+= render 'follow_form'
