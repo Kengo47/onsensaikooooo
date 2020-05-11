@@ -26,4 +26,17 @@ class Post < ApplicationRecord
   mount_uploader :picture, PictureUploader
   validates :title, presence: true, length: { maximum: 20 }
   validates :body, length: { maximum: 140 }
+  validate :image_presence
+
+  private
+
+    def image_presence
+      if image.attached?
+        unless image.content_type_in?(%('image/jpeg image/png'))
+          errors.add(:image, 'にはjpegまたはpngファイルを添付してください')
+        end
+      else
+        errors.add(:image, 'ファイルを添付してください')
+      end
+    end
 end
