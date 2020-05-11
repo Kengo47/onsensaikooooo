@@ -1,10 +1,23 @@
-%header
-  = link_to 'OnSen!', root_path
-  - if user_signed_in?
-    = link_to '投稿', new_post_path
-    = link_to 'マイページ', current_user
-    = link_to 'アカウント編集', edit_user_registration_path
-    = link_to 'ログアウト', destroy_user_session_path, method: :delete
-  - else
-    = link_to '新規登録', new_user_registration_path
-    = link_to 'ログイン', new_user_session_path
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  = link_to 'OnSen!', root_path, { class: "navbar-brand font-weight-bold" }
+  %button.navbar-toggler{ type: "button",
+                          data: { toggle: "collapse", target: "#navbarSupportedContent" },
+                          aria: { controls: "navbarSupportedContent", expanded: "false", label: "Toggle navigation" } }
+    %span.navbar-toggler-icon
+
+  .collapse.navbar-collapse#navbarSupportedContent
+    %ul.navbar-nav.mr-auto
+      - if user_signed_in?
+        %li.nav-item.nav-link
+          = link_to '投稿', new_post_path
+        %li.nav-item.nav-link
+          = link_to 'マイページ', current_user
+        %li.nav-item.nav-link
+          = link_to 'アカウント編集', edit_user_registration_path
+        %li.nav-item.nav-link
+          = link_to 'ログアウト', destroy_user_session_path, method: :delete
+      - else
+        %li.nav-item.nav-link
+          = link_to '新規登録', new_user_registration_path
+        %li.nav-item.nav-link
+          = link_to 'ログイン', new_user_session_path

@@ -11,8 +11,5 @@
   %body
     = render 'layouts/header'
     .container.text-center
-      %p.notice
-        = notice
-      %p.alert
-        = alert
+      = render 'layouts/flash'
       = yield
