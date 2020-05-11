@@ -1,6 +1,6 @@
 %h1 新規投稿
 = form_for(@post) do |f|
-  = render 'shared/error_messages'
+  = render 'shared/error_messages', { object: f.object }
   = f.label :title
   %br
   = f.text_field :title

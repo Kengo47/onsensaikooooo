@@ -1,12 +1,9 @@
 = @user.name
-%h2 あなたの投稿
-%ul
-  - @user_posts.each do |post|
-    %li
-      = post.title
-      = post.body
-      - if post.image.attached?
-        = image_tag post.image.variant(resize: '200x200').processed, class: "image"
+%h2 あなたのプロフィール画像
+- if @user.avatar.attached?
+  = image_tag @user.avatar.variant(resize: '300x300').processed, class: "avatar"
+- else
+  = image_tag ("no_image.png"), class: "avatar"
 
 .stats
   %strong#following
@@ -18,7 +15,44 @@
 
 = render 'follow_form'
 
-- if @user.avatar.attached?
-  = image_tag @user.avatar.variant(resize: '300x300').processed, class: "avatar"
-- else
-  = image_tag ("no_image.png"), class: "avatar"
+%ul.nav.nav-tabs.justify-content-center
+  %li.nav-item
+    %a{ href: '#tab1', class: 'nav-link active', 'data-toggle' => 'tab' }
+      あなたの投稿
+  %li.nav-item
+    %a{ href: '#tab2', class: 'nav-link', 'data-toggle' => 'tab' }
+      あなたのいいね
+  %li.nav-item
+    %a{ href: '#tab3', class: 'nav-link', 'data-toggle' => 'tab' }
+      フォロー
+  %li.nav-item
+    %a{ href: '#tab4', class: 'nav-link', 'data-toggle' => 'tab' }
+      フォロワー
+
+.tab-content
+  #tab1.tab-pane.active
+    %h2 あなたの投稿
+    %ul
+      - @user_posts.each do |post|
+        %li
+          = post.title
+          = post.body
+          - if post.image.attached?
+            = image_tag post.image.variant(resize: '200x200').processed, class: "image"
+  #tab2.tab-pane
+    %h1 まだいいねしてないですね。
+  #tab3.tab-pane
+    - if @following_users.any?
+      - @following_users.each do |u|
+        %li
+          = u.name
+    - else
+      %h1 誰かフォローしてみましょう。
+      ユーザー検索フォーム or 一覧ページ
+  #tab4.tab-pane
+    - if @followers_users.any?
+      - @followers_users.each do |u|
+        %li
+          = u.name
+    - else
+      %h1 まだ誰からもフォローされていないようです・・・。
