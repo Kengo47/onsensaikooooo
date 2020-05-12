@@ -24,6 +24,7 @@ class Post < ApplicationRecord
   has_one_attached :image
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
+  validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 20 }
   validates :body, length: { maximum: 140 }
   validate :image_presence
@@ -32,7 +33,7 @@ class Post < ApplicationRecord
 
     def image_presence
       if image.attached?
-        unless image.content_type_in?(%('image/jpeg image/png'))
+        unless image.content_type.in?(%('image/jpeg image/png'))
           errors.add(:image, 'にはjpegまたはpngファイルを添付してください')
         end
       else
