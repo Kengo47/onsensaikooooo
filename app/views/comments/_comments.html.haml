@@ -1,0 +1,3 @@
+%li= comment.comment
+- if user_signed_in? && (comment.user.id == current_user.id)
+  = link_to "delete", comment, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger"

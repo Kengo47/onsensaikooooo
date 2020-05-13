@@ -1,0 +1,4 @@
+= form_with model: comment do |f|
+  = f.hidden_field :post_id
+  = f.text_area :comment
+  = f.submit '送信'
