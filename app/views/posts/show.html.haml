@@ -6,9 +6,9 @@
 %span body:
 = @post.body
 %br/
-%span image:
-- if @post.image.attached?
-  = image_tag @post.image.variant(resize: '200x200').processed, class: "image"
+%span picture:
+- if @post.picture?
+  = image_tag @post.picture.thumb.url
 %br/
 - if current_user?(@post.user)
   = link_to "delete", post_path(@post), method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger"

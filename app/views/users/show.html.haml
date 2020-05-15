@@ -1,7 +1,7 @@
 = @user.name
 %h2 あなたのプロフィール画像
-- if @user.avatar.attached?
-  = image_tag @user.avatar.variant(resize: '300x300').processed, class: "avatar"
+- if @user.avatar?
+  = image_tag @user.avatar.url
 - else
   = image_tag ("no_image.png"), class: "avatar"
 
@@ -35,8 +35,8 @@
       - @user_posts.each do |post|
         .col-lg-4.col-md-6
           .card.mb-1
-            - if post.image.attached?
-              = image_tag post.image, { class: "card-index" }
+            - if post.picture?
+              = image_tag post.picture.thumb.url, { class: "card-index" }
             - else
               = image_tag "no_image.png", { class: "card-index" }
             .card-body

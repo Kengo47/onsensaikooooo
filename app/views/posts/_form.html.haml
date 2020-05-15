@@ -1,16 +1,15 @@
-= form_for(@post) do |f|
+= form_for(post) do |f|
   = render 'shared/error_messages', { object: f.object }
   = f.label :title
   %br
   = f.text_field :title
-  %br
-  - if @post.image.attached?
-    %span now image:
-    = image_tag @post.image.variant(resize: '200x200').processed, class: "image"
   %br/
-  = f.label :image
+  = f.label :picture
   %br/
-  = f.file_field :image, accept: 'image/jpeg, image/png'
+  - if post.picture.url.present?
+    = image_tag post.picture.thumb.url
+  = f.file_field :picture, accept: 'image/jpeg, image/png'
+  = f.hidden_field :picture_cache
   %br
   = f.text_area :body, placeholder: 'この温泉に関する感想を書いてね！'
   %br
