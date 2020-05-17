@@ -1,19 +1,22 @@
-= @user.name
-%h2 あなたのプロフィール画像
-- if @user.avatar?
-  = image_tag @user.avatar.url
-- else
-  = image_tag ("no_image.png"), class: "avatar"
-
-.stats
-  %strong#following
-    = @user.following.count
-  フォロー中
-  %strong#followers
-    = @user.followers.count
-  フォロワー
-
-= render partial: 'follow_form', locals: { user: @user }
+.row.mx-auto{style: "max-width: 700px;"}
+  .col-md-6.mx-auto{style: "border: 1px solid pink;"}
+    - if @user.avatar?
+      = image_tag @user.avatar.thumb.url, class: "rounded-circle"
+    - else
+      = image_tag "no_image.png", class: "avatar rounded-circle"
+  .col-md-6{style: "border: 1px solid red;"}
+    %h5= @user.name
+    .stats
+      %strong#following
+        = @user.following.count
+      フォロー中
+      %strong#followers
+        = @user.followers.count
+      フォロワー
+    - if @user.id == current_user.id
+      = link_to 'アカウント編集', edit_user_registration_path, class: "btn btn-outline-dark mt-5"
+    - else
+      = render partial: 'follow_form', locals: { user: @user }
 
 %ul.nav.nav-tabs.justify-content-center
   %li.nav-item

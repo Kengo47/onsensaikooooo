@@ -3,9 +3,7 @@ class PostsController < ApplicationController
   before_action :set_target_post, only: [:show, :edit, :update, :destroy]
 
   def new
-    if user_signed_in?
-      @post = current_user.posts.build
-    end
+    @post = Post.new
   end
 
   def show
