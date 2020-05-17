@@ -13,8 +13,6 @@
         %li.nav-item.nav-link
           = link_to 'マイページ', current_user
         %li.nav-item.nav-link
-          = link_to 'アカウント編集', edit_user_registration_path
-        %li.nav-item.nav-link
           = link_to 'ログアウト', destroy_user_session_path, method: :delete
       - else
         %li.nav-item.nav-link
