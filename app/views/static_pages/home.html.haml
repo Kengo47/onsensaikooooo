@@ -17,3 +17,6 @@
           %h4.card-title
             = post.title
           = link_to "詳細を見る", post_path(post), { class: "btn btn-primary" }
+
+
+= paginate @posts
