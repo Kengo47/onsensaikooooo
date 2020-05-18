@@ -1,5 +1,13 @@
 ja:
   activerecord:
+    attributes:
+      post:
+        title: "タイトル"
+        image: "画像"
+        body: "思い出"
+        prefecture: "都道府県"
+        city: "市区町村"
+        picture: "画像"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

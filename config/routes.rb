@@ -17,7 +17,11 @@ Rails.application.routes.draw do
   root 'static_pages#home'
 
   resources :users, only: [:show]
-  resources :posts, only: [:new, :show, :create, :edit, :update, :destroy]
+  resources :posts, only: [:new, :show, :create, :edit, :update, :destroy] do
+    collection do
+      get :cities_select
+    end
+  end
   resources :relationships, only: [:create, :destroy]
   resources :comments, only: [:create, :destroy]
 end
