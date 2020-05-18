@@ -17,7 +17,9 @@ class PostsController < ApplicationController
       flash[:notice] = "投稿しました！"
       redirect_to root_url
     else
-      render 'posts/new'
+      redirect_to new_post_path, flash: {
+        error_messages: @post.errors.full_messages
+      }
     end
   end
 
@@ -27,10 +29,12 @@ class PostsController < ApplicationController
 
   def update
     if @post.update_attributes(post_params)
-      flash[:notice] = "Post updated"
+      flash[:notice] = "更新しました！"
       redirect_to root_url
     else
-      render 'posts/edit'
+      redirect_back fallback_location: @post, flash: {
+        error_messages: @post.errors.full_messages
+      }
     end
   end
 
@@ -40,10 +44,16 @@ class PostsController < ApplicationController
     redirect_to root_url
   end
 
+  def cities_select
+    if request.xhr?
+      render partial: 'cities', locals: { prefecture_id: params[:prefecture_id]}
+    end
+  end
+
   private
 
     def post_params
-      params.require(:post).permit(:title, :body, :picture, :picture_cache)
+      params.require(:post).permit(:title, :body, :picture, :picture_cache, :prefecture_id, :city_id)
     end
 
     def set_target_post

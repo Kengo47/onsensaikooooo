@@ -3,11 +3,11 @@ module DeviseHelper
   def bootstrap_alert(key)
     case key
     when 'alert'
-      'warning'
-    when 'notice'
-      'success'
+      'danger'
     when 'error'
       'danger'
+    when 'notice'
+      'success'
     end
   end
 
