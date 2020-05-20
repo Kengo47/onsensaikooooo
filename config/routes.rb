@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'static_pages#home'
+
   devise_for :users,
     path: '',
     path_names: {
@@ -14,13 +16,13 @@ Rails.application.routes.draw do
   devise_scope :users do
     get 'signup', to: 'users/registrations#new'
   end
-  root 'static_pages#home'
 
   resources :users, only: [:show]
   resources :posts, only: [:new, :show, :create, :edit, :update, :destroy] do
     collection do
       get :cities_select
     end
+    resource :likes, only: [:create, :destroy]
   end
   resources :relationships, only: [:create, :destroy]
   resources :comments, only: [:create, :destroy]

@@ -9,6 +9,7 @@ class PostsController < ApplicationController
   def show
     @comment = Comment.new(post_id: @post.id)
     @comments = @post.comments.all
+    @like = Like.new
   end
 
   def create

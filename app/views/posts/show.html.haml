@@ -24,6 +24,13 @@
       = link_to "edit", edit_post_path(@post), locals: { post: @post }, class: "btn btn-warning"
 
   .col-md-6{style: "border: 1px solid pink;"}
+
+    #like_area
+      = render partial: 'likes/like', locals: { post: @post }
+
+    #likes_count
+      = @post.likes.count
+
     %h5 コメント入力（50文字以内）
     - if user_signed_in?
       = render partial: 'comments/form', locals: { comment: @comment }
@@ -33,3 +40,6 @@
       = render partial: 'comments/comments', collection: @comments, as: :comment
     - else
       %p no comments...
+
+    %br/
+    = current_user.liked_posts.count

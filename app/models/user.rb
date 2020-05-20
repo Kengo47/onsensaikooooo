@@ -34,11 +34,13 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
   mount_uploader :avatar, AvatarUploader
   validates :name, presence: true, length: { maximum: 10 }
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+          :recoverable, :rememberable, :validatable, :confirmable
 
   # ユーザーをフォローする
   def follow(other_user)
@@ -53,6 +55,11 @@ class User < ApplicationRecord
   # 現在のユーザーがフォローしてたらtrueを返す
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  # いいねしているかどうかの判定
+  def already_liked?(post)
+    self.likes.exists?(post_id: post.id)
   end
 
 end
