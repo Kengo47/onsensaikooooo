@@ -30,6 +30,8 @@ class Post < ApplicationRecord
   belongs_to :prefecture
   belongs_to :city
   has_many :comments, dependent: :destroy
+  has_many :likes
+  has_many :liked_users, through: :likes, source: :user
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true

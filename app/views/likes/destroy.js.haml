@@ -1,0 +1,2 @@
+$("#like_area").html("#{escape_javascript(render partial: 'likes/like', locals: { post: @post })}");
+$("#likes_count").html("#{@post.likes.count}");
