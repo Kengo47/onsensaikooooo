@@ -1,27 +1,58 @@
 = form_with model: post do |f|
   = render 'shared/error_messages', { object: f.object }
-  = f.label :title
-  %br
-  = f.text_field :title
-  %br/
-  = f.label :picture
-  %br/
-  - if post.picture.url.present?
-    = image_tag post.picture.thumb.url
-  = f.file_field :picture, accept: 'image/jpeg, image/png'
-  = f.hidden_field :picture_cache
-  %br
-  = f.label :body
-  %br/
-  = f.text_area :body, placeholder: 'この温泉に関する感想を書いてね！'
-  %br
-  = f.label :prefecture
-  %br/
-  = f.collection_select :prefecture_id, Prefecture.all, :id, :name, { prompt: '選択してください', selected: post.prefecture_id }, { class: "form-control" }
-  %br/
+  .row
+    .col-md-6
+      = f.label :title
+      %br
+      = f.text_field :title
+      %br/
+      = f.label :prefecture_id, "都道府県は？"
+      %br/
+      = f.collection_select :prefecture_id, Prefecture.all, :id, :name, { prompt: '選択してください', selected: post.prefecture_id }, { class: "form-control" }
+      = f.label :city_id, "市区町村は？"
+      #cities_select
+        = render partial: 'cities', locals: { prefecture_id: post.prefecture_id }
+    .col-md-6
+      = f.label :picture do
+        #img_field{ onclick: "$('#file').click()" }
+          - if post.picture.url.present?
+            = image_tag post.picture.thumb.url
+          - else
+            = icon("fas", "bath")
+      = f.file_field :picture, accept: 'image/jpeg, image/png', style: "display:none;", id: "file", class: "image"
+      = f.hidden_field :picture_cache
+  .row
+    .col-md-6.mx-auto
+      = f.label :body
+      %br/
+      = f.text_area :body, placeholder: 'この温泉に関する感想を書いてね！', size: "40x10"
+      %br
+  .row
+    .col-md-6.mx-auto.mb-3
+      = f.submit yield(:button_text), { class: "btn btn-danger form-control" }
 
-  = f.label :city
-  #cities_select
-    = render partial: 'cities', locals: { prefecture_id: post.prefecture_id }
+:javascript
+  $(function(){
+    $fileField = $('#file')
 
-  = f.submit yield(:button_text), { class: "btn btn-primary" }
+    // 選択された画像を取得し表示
+    $($fileField).on('change', $fileField, function(e) {
+      file = e.target.files[0]
+      reader = new FileReader(),
+      $preview = $("#img_field");
+
+      reader.onload = (function(file) {
+        return function(e) {
+          $preview.empty();
+          $preview.append($('<img>').attr({
+            src: e.target.result,
+            width: "100%",
+            height: "100%",
+            class: "preview",
+            title: file.name
+          }));
+        };
+      })(file);
+      reader.readAsDataURL(file);
+    });
+  });
