@@ -35,17 +35,7 @@
 .tab-content
   #tab1.tab-pane.active
     .row
-      - @user_posts.each do |post|
-        .col-lg-4.col-md-6
-          .card.mb-1
-            - if post.picture?
-              = image_tag post.picture.thumb.url, { class: "card-index" }
-            - else
-              = image_tag "no_image.png", { class: "card-index" }
-            .card-body
-              %h4.card-title
-                = post.title
-              = link_to "詳細を見る", post_path(post), { class: "btn btn-primary" }
+      = render partial: "posts/post", locals: { posts: @user_posts }
     = paginate @user_posts
   #tab2.tab-pane
     %h1 まだいいねしてないですね。

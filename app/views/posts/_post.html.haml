@@ -1,0 +1,21 @@
+- posts.each do |post|
+  .col-lg-4.col-md-6
+    .card.mb-1.shadow
+      = link_to post_path(post) do
+        = image_tag post.picture.thumb.url, { class: "card-index" }
+      .card-footer
+        .c-f-left.text-left
+          %small
+            = post.prefecture.name
+            |
+            = post.city.name
+            %br/
+            いいね
+            = post.likes.count
+            件
+        .c-f-right.text-right
+          %small 投稿者:
+          - if post.user.avatar?
+            = link_to image_tag(post.user.avatar.url, class: "card-avatar"), post.user
+          - else
+            = link_to image_tag("no_image.png", class: "card-avatar"), post.user

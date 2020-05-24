@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       registration: 'signup'
     },
     :controllers => {
-      :registrations => 'users/registrations',
+      registrations: 'users/registrations',
       sessions: "users/sessions"
     }
   devise_scope :users do

@@ -1,10 +1,11 @@
-%h2 Resend confirmation instructions
-= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = bootstrap_devise_error_messages!
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
-  .actions
-    = f.submit "Resend confirmation instructions"
-= render "users/shared/links"
+.user_form.mx-auto
+  %h2.title-border アカウント有効化メールの再送
+  = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+    = bootstrap_devise_error_messages!
+    .form-group.mt-4
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control"
+    .form-group
+      = f.submit "再送する", class: "btn btn-danger mb-3"
+  = render "users/shared/links"
