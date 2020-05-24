@@ -84,20 +84,3 @@
     }
   }
 }
-
-#avatar_field {
-  border: solid 1px #A62125;
-  border-radius: 50%;
-  cursor: pointer;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-color: #fff;
-  overflow: hidden;
-  box-sizing: border-box;
-  transition: 0.3s ease-out;
-  &:hover {
-    transition: 0.3s ease-out;
-    opacity: 0.9;
-  }
-}
