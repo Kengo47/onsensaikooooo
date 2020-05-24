@@ -1,52 +1,64 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = bootstrap_devise_error_messages!
-  .field
-    = f.label :avatar
-    %br/
-    - if current_user.avatar?
-      = image_tag current_user.avatar.thumb.url, class: "rounded-circle"
-    - else
-      = image_tag 'no_image.png', class: "avatar rounded-circle"
-    %br/
-    %button{ type: "button", class: "btn btn-primary"}
-      = f.file_field :avatar, accept: 'image/jpeg, image/png'
+.user_form.mx-auto
+  %h2.title-border プロフィール編集
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    = bootstrap_devise_error_messages!
+    .form-group.mt-4
+      = f.label :avatar do
+        #avatar_field{ onclick: "$('#file').click()" }
+          - if current_user.avatar.url.present?
+            = image_tag current_user.avatar.thumb.url, class: "rounded-circle"
+          - else
+            = image_tag 'no_image.png', class: "avatar rounded-circle"
+      = f.file_field :avatar, accept: 'image/jpeg, image/png', style: "display:none;", id: "file", class: "image"
       = f.hidden_field :avatar_cache
-    %br/
-  .field
-    = f.label :name
-    %br/
-    = f.text_field :name
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  .field
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
+    .form-group
+      = f.label :name
       %br/
-      %em
-        = @minimum_password_length
-        characters minimum
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit "Update"
-%h3 Cancel my account
-%p
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
-= link_to "Baack", :back
+      = f.text_field :name, class: "form-control"
+    .form-group
+      = f.label :email
+      %br/
+      = f.email_field :email, autocomplete: "email", class: "form-control"
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      %div
+        Currently waiting confirmation for: #{resource.unconfirmed_email}
+    .form-group
+      = f.label :password, "パスワード変更"
+      %i (変更しない場合は空欄のままで)
+      %br/
+      = f.password_field :password, autocomplete: "new-password", class: "form-control"
+    .form-group
+      = f.label :password_confirmation, "新しいパスワード確認"
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+    = f.submit "更新する", class: "btn btn-danger"
+    = link_to "戻る", current_user, class: "btn btn-outline-primary"
+
+  %h3.title-border.mt-5 アカウントの削除
+  = link_to "削除する", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-danger"
+
+:javascript
+  $(function(){
+    $fileField = $('#file')
+
+    // 選択された画像を取得し表示
+    $($fileField).on('change', $fileField, function(e) {
+      file = e.target.files[0]
+      reader = new FileReader(),
+      $preview = $("#avatar_field");
+
+      reader.onload = (function(file) {
+        return function(e) {
+          $preview.empty();
+          $preview.append($('<img>').attr({
+            src: e.target.result,
+            width: "200px",
+            height: "200px",
+            class: "preview",
+            title: file.name
+          }));
+        };
+      })(file);
+      reader.readAsDataURL(file);
+    });
+  });
