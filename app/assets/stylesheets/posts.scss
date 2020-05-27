@@ -2,10 +2,94 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.post {
-  width: 300px;
+$color-main: #A1232D;
+.btn-circle {
+  display: inline-block;
+  text-decoration: none;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+  font-weight: bold;
+  transition: .4s;
+}
+
+.post-image {
   max-width: 100%;
   height: auto;
+}
+
+.post-frame {
+  border: 2px solid gray;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.post-title {
+  border-bottom: solid 3px gray;
+  position: relative;
+  &:after {
+    position: absolute;
+    content: " ";
+    display: block;
+    border-bottom: solid 3px $color-main;
+    bottom: -3px;
+    width: 30%;
+  }
+}
+
+.table {
+  color: #494949!important;
+  table-layout: fixed;
+  width: 100%;
+}
+
+th {
+  width: 30%;
+  background-color: #eee;
+}
+
+td {
+  width: 70%;
+  word-wrap: break-word;
+}
+
+.btn-circle-border-simple1 {
+  @extend .btn-circle;
+  color: $color-main;
+  border: solid 2px $color-main;
+  &:hover {
+    background: $color-main;
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.btn-circle-border-simple2 {
+  @extend .btn-circle;
+  color: #fff;
+  background: $color-main;
+  border: solid 2px $color-main;
+  &:hover {
+    background: #eee;
+    color: $color-main;
+    text-decoration: none;
+    border: solid 2px #494949;
+  }
+}
+
+.btn-circle-border-simple3 {
+  @extend .btn-circle;
+  color: #494949;
+  background: #eee;
+  border: solid 2px $color-main;
+  &:hover {
+    background: #eee;
+    color: $color-main;
+    text-decoration: none;
+  }
 }
 
 .card {
