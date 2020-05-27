@@ -1,5 +1,5 @@
 - if user_signed_in?
   - if current_user.already_liked?(post)
-    = link_to 'お気に入り解除', post_likes_path(post.id), method: :delete, remote: true, class: "btn btn-warning"
+    = link_to 'お気に入り済', post_likes_path(post.id), method: :delete, remote: true, class: "btn-circle-border-simple2"
   - else
-    = link_to 'お気に入り登録', post_likes_path(post.id), method: :post, remote: true, class: "btn btn-primary"
+    = link_to 'お気に入り!', post_likes_path(post.id), method: :post, remote: true, class: "btn-circle-border-simple1"

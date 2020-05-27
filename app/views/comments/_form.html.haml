@@ -1,4 +1,7 @@
 = form_with model: comment do |f|
   = f.hidden_field :post_id
-  = f.text_area :comment
-  = f.submit '送信'
+  = f.text_area :comment, class: "textlines"
+  %br/
+  .divss.text-right
+    = button_tag type: 'submit', class: "btn btn-default" do
+      %i.fas.fa-paper-plane.fa-lg

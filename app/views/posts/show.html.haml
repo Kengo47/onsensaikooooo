@@ -1,45 +1,49 @@
-%h1 投稿詳細
+.row.mb-5
+  .col-md-6.mb-5
+    .post-frame.shadow
+      = image_tag @post.picture.url, class: "post-image"
 
-.row
+  .col-md-6
+    %h3.post-title.text-left.mb-5
+      この温泉の思い出詳細
 
-  .col-md-6{style: "border: 1px solid gray;"}
-    %span title:
-    = @post.title
-    %br/
-    %span prefecture:
-    = @post.prefecture.name
-    %br/
-    %span city:
-    = @post.city.name
-    %br/
-    %span body:
-    = @post.body
-    %br/
-    %span picture:
-    - if @post.picture?
-      = image_tag @post.picture.thumb.url, class: "post"
-    %br/
-    - if current_user?(@post.user)
-      = link_to "delete", post_path(@post), method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger"
-      = link_to "edit", edit_post_path(@post), locals: { post: @post }, class: "btn btn-warning"
+    %table.table.mb-3
+      %tr
+        %th タイトル
+        %td= @post.title
+      %tr
+        %th 場所
+        %td
+          = @post.prefecture.name
+          = @post.city.name
+      %tr
+        %th 詳細
+        %td= @post.body
+      %tr
+        %th お気に入りされた数
+        %td
+          #likes_count
+            = @post.likes.count
 
-  .col-md-6{style: "border: 1px solid pink;"}
+    .row
+      .col-md-4
+        #like_area
+          = render partial: 'likes/like', locals: { post: @post }
+      .col-md-8
+        #edit_area
+          - if current_user?(@post.user)
+            = link_to "編集", edit_post_path(@post), locals: { post: @post }, class: "btn-circle-border-simple3"
+            = link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除して良いですか？" }, class: "btn-circle-border-simple3"
 
-    #like_area
-      = render partial: 'likes/like', locals: { post: @post }
+%h5 コメントを入力（50文字以内）
+- if user_signed_in?
+  = render partial: 'comments/form', locals: { comment: @comment }
 
-    #likes_count
-      = @post.likes.count
+%h5.border-bottom.mb-3 コメント一覧
+- if @post.comments.any?
+  = render partial: 'comments/comments', collection: @comments, as: :comment
+- else
+  %p コメントはまだ来ていません...
 
-    %h5 コメント入力（50文字以内）
-    - if user_signed_in?
-      = render partial: 'comments/form', locals: { comment: @comment }
-
-    %h5 コメント一覧
-    - if @post.comments.any?
-      = render partial: 'comments/comments', collection: @comments, as: :comment
-    - else
-      %p no comments...
-
-    %br/
-    = current_user.liked_posts.count
+%br/
+= current_user.liked_posts.count
