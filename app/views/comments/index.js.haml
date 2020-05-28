@@ -1,0 +1,2 @@
+$("#comments-area").html("#{escape_javascript(render partial: 'index', locals: { comments: @comment.post.comments })}");
+$("textarea").val('')
