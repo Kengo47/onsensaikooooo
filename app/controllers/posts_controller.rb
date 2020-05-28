@@ -7,8 +7,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @comment = Comment.new(post_id: @post.id)
-    @comments = @post.comments.all
+    @comment = Comment.new
+    @comments = @post.comments.all.includes(:user)
     @like = Like.new
   end
 

@@ -1,0 +1,20 @@
+= comments.count
+件コメント
+- comments.each do |comment|
+  - unless comment.id.nil?
+    .comment-container
+      .row.comment-box
+        .col-md-2.comment-avatar
+          - if comment.user.avatar?
+            = link_to image_tag(comment.user.avatar.url, class: "comment-avatar"), comment.user
+          - else
+            = link_to image_tag("no_image.png", class: "comment-avatar"), comment.user
+        .col-md-10.text-left
+          %p= link_to "@#{comment.user.name}", comment.user
+          .comment-entry
+            = comment.comment
+            - if user_signed_in? && (comment.user == current_user)
+              = link_to post_comment_path(comment.post_id, comment.id), method: :delete, remote: true, data: { confirm: "コメントを削除してよろしいですか？" }, class: "comment-destroy" do
+                %i.fas.fa-trash{ style: "color: black;" }
+          .comment-date.text-right
+            = comment.created_at.to_s(:datetime_jp)
