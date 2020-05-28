@@ -4,8 +4,8 @@
 #
 #  id            :bigint           not null, primary key
 #  body          :text(65535)
+#  name          :string(255)      not null
 #  picture       :string(255)
-#  title         :string(255)      not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  city_id       :bigint

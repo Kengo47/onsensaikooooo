@@ -4,8 +4,8 @@
 #
 #  id            :bigint           not null, primary key
 #  body          :text(65535)
+#  name          :string(255)      not null
 #  picture       :string(255)
-#  title         :string(255)      not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  city_id       :bigint
@@ -35,7 +35,7 @@ class Post < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
   validates :user_id, presence: true
-  validates :title, presence: true, length: { maximum: 20 }
+  validates :name, presence: true, length: { maximum: 20 }
   validates :body, presence: true, length: { maximum: 140 }
   validates :picture, presence: true
 

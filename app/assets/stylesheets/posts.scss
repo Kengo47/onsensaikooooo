@@ -17,6 +17,42 @@ $color-main: #A1232D;
   transition: .4s;
 }
 
+#img_field {
+  font-size: 15px;
+  margin-top: 10px;
+  padding: 5px 8px;
+  border: solid 1px #A62125;
+  color: #666;
+  padding: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 400px;
+  height: 250px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: 0.3s ease-out;
+  i {
+    font-size: 100px;
+    color: #aaa;
+    line-height: 250px;
+    transition: 0.3s ease-out;
+  }
+  &:hover {
+    background-color: #A62125;
+    transition: 0.3s ease-out;
+    opacity: 0.9;
+    i {
+      transition: 0.3s ease-out;
+      display: block;
+      color: #fff;
+    }
+  }
+}
+
 .post-image {
   max-width: 100%;
   height: auto;

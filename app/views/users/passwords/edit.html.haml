@@ -6,11 +6,11 @@
     .form-group.mt-4
       = f.label :password, "新しいパスワード（６文字以上）"
       %br/
-      = f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control"
+      = f.password_field :password, autofocus: true, autocomplete: "new-password", required: true, minlength: @minimum_password_length, class: "form-control"
     .form-group
       = f.label :password_confirmation
       %br/
-      = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+      = f.password_field :password_confirmation, autocomplete: "new-password", required: true, minlength: @minimum_password_length, class: "form-control"
     .form-group
       = f.submit "パスワードの更新", class: "btn btn-danger mb-3"
   = render "users/shared/links"
