@@ -1,7 +1,7 @@
 = comments.count
 件コメント
-- comments.each do |comment|
-  - unless comment.id.nil?
+- if comments.any?
+  - comments.each do |comment|
     .comment-container
       .row.comment-box
         .col-md-2.comment-avatar
@@ -18,3 +18,5 @@
                 %i.fas.fa-trash{ style: "color: black;" }
           .comment-date.text-right
             = comment.created_at.to_s(:datetime_jp)
+- else
+  %p.text-center まだコメントはありません...

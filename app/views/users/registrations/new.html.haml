@@ -5,19 +5,19 @@
     .form-group.mt-4
       = f.label :name, "ニックネーム（１０文字以内）"
       %br/
-      = f.text_field :name, class: "form-control"
+      = f.text_field :name, autofocus: true, required: true, maxlength: '10', class: "form-control"
     .form-group
       = f.label :email
       %br/
-      = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+      = f.email_field :email, autocomplete: "email", required: true, class: "form-control"
     .form-group
       = f.label :password, "パスワード（６文字以上）"
       %br/
-      = f.password_field :password, autocomplete: "new-password", class: "form-control"
+      = f.password_field :password, autocomplete: "new-password", required: true, minlength: @minimum_password_length, class: "form-control"
     .form-group
       = f.label :password_confirmation
       %br/
-      = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+      = f.password_field :password_confirmation, autocomplete: "new-password", required: true, minlength: @minimum_password_length, class: "form-control"
     .form-group
       = f.submit "新規登録", class: "btn btn-danger mb-3"
   = render "users/shared/links"

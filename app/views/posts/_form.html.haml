@@ -1,18 +1,18 @@
-= form_with model: post do |f|
-  = render 'shared/error_messages', { object: f.object }
-  .row
-    .col-md-6
-      = f.label :title
+= form_with model: post, local: true do |f|
+  .row.mb-5
+    .col-md-6.text-left
+      = f.label :name, "温泉の名前（20文字以内）"
       %br
-      = f.text_field :title
+      = f.text_field :name, placeholder: "この思い出にタイトルをつけてね！", required: true, maxlength: '20', class: "form-control"
       %br/
       = f.label :prefecture_id, "都道府県は？"
       %br/
-      = f.collection_select :prefecture_id, Prefecture.all, :id, :name, { prompt: '選択してください', selected: post.prefecture_id }, { class: "form-control" }
+      = f.collection_select :prefecture_id, Prefecture.all, :id, :name, { prompt: '選択してください', selected: post.prefecture_id }, { class: "form-control", required: true }
       = f.label :city_id, "市区町村は？"
       #cities_select
         = render partial: 'cities', locals: { prefecture_id: post.prefecture_id }
     .col-md-6
+      %p 画像を一枚添付してね
       = f.label :picture do
         #img_field{ onclick: "$('#file').click()" }
           - if post.picture.url.present?
@@ -21,13 +21,12 @@
             = icon("fas", "bath")
       = f.file_field :picture, accept: 'image/jpeg, image/png', style: "display:none;", id: "file", class: "image"
       = f.hidden_field :picture_cache
-  .row
-    .col-md-6.mx-auto
-      = f.label :body
-      %br/
-      = f.text_area :body, placeholder: 'この温泉に関する感想を書いてね！', size: "40x10"
-      %br
-  .row
+  .row.pr-3.pl-3
+    = f.label :body, "思い出の詳細（140文字以内）"
+    %br/
+    = f.text_area :body, placeholder: 'この温泉の詳細を書いてね！', required: true, maxlength: '140', class: "form-control"
+    %br
+  .row.mt-3
     .col-md-6.mx-auto.mb-3
       = f.submit yield(:button_text), { class: "btn btn-danger form-control" }
 
