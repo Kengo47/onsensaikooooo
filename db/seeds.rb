@@ -13,6 +13,13 @@ CSV.foreach('db/csv/KEN_CITY.CSV', encoding: "Shift_JIS:UTF-8") do |row|
   City.find_or_create_by(name: city_name, prefecture_id: prefecture.id)
 end
 
+# かんたんログイン用ユーザーの作成
+User.create!(name: "Guest User",
+  email: "guest@example.com",
+  password: "123456",
+  confirmed_at: Time.now)
+
+# サンプルユーザーの作成
 5.times do |n|
   User.create!(
     email: "test#{n + 1}@test.com",
