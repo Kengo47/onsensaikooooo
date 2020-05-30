@@ -1,47 +1,47 @@
 %ul.nav.nav-tabs.justify-content-center.mt-3
   %li.nav-item
     %a{ href: '#tab1', class: 'nav-link active n-l-item', 'data-toggle' => 'tab' }
+      = user.posts.count
       思い出
   %li.nav-item
     %a{ href: '#tab2', class: 'nav-link n-l-item', 'data-toggle' => 'tab' }
+      = user_liked_posts.count
       お気に入り
   %li.nav-item
     %a{ href: '#tab3', class: 'nav-link n-l-item', 'data-toggle' => 'tab' }
       %strong#following
-        = @user.following.count
+        = user.following.count
       フォロー
   %li.nav-item
     %a{ href: '#tab4', class: 'nav-link n-l-item', 'data-toggle' => 'tab' }
       %strong#followers
-        = @user.followers.count
+        = user.followers.count
       フォロワー
 
 .tab-content
   #tab1.tab-pane.active
-    .row
-      - if @user.posts.any?
-        = render partial: "posts/post", locals: { posts: @user_posts }
-      - else
-        .no-contents
-          %p まだ思い出がありません...
-          - if current_user?(@user)
-            = link_to '思い出を投稿する！', new_post_path, class: "btn btn-outline-danger"
+    - if user.posts.any?
+      = render partial: "posts/post", locals: { posts: user_posts}
+    - else
+      .no-contents
+        %p まだ思い出がありません...
+        - if current_user?(user)
+          = link_to '思い出を投稿する！', new_post_path, class: "btn btn-outline-danger"
   #tab2.tab-pane
-    .row
-      - if @user_liked_posts.any?
-        = render partial: "posts/post", locals: { posts: @user_liked_posts }
-      - else
-        .no-contents
-          %p お気に入りの思い出を探そう！
+    - if user_liked_posts.any?
+      = render partial: "posts/post", locals: { posts: user_liked_posts }
+    - else
+      .no-contents
+        %p お気に入りの思い出を探そう！
   #tab3.tab-pane
-    - if @following_users.any?
-      = render partial: 'show_follows', locals: { users: @following_users }
+    - if following.any?
+      = render partial: 'show_follows', locals: { users: following }
     - else
       .no-contents
         %p フォローしてみましょう！
   #tab4.tab-pane
-    - if @followers_users.any?
-      = render partial: 'show_follows', locals: { users: @followers_users }
+    - if followers.any?
+      = render partial: 'show_follows', locals: { users: followers }
     - else
       .no-contents
         %p まだ誰からもフォローされていないようです...
