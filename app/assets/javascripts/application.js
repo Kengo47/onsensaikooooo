@@ -13,11 +13,12 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require_tree .
 //= require jquery
 //= require jquery_ujs
 //= require popper
 //= require bootstrap
+//= require infinite-scroll.pkgd.min
+//= require_tree .
 
 // Prefectureセレクトボックスに連動してCityセレクトボックスを変更する
 $(document).on('change', '#post_prefecture_id', function() {
@@ -29,5 +30,18 @@ $(document).on('change', '#post_prefecture_id', function() {
     }
   }).done(function(data) {
     return $('#cities_select').html(data);
+  });
+});
+
+// 無限スクロール
+$(document).on('turbolinks:load', function() {
+  $('.post-cards').infiniteScroll({
+    path: 'nav ul.pagination a[rel=next]',
+    append: '.post-cards .post-card',
+    history: false,
+    status: '.page-load-status',
+    hideNav: 'nav ul.pagination',
+    button: '.view-more',
+    scrollThreshold: false
   });
 });

@@ -16,4 +16,4 @@
   - else
     = render partial: 'follow_form', locals: { user: @user }
 
-= render 'user_tabs'
+= render partial: 'user_tabs', locals: { user: @user, user_posts: @user_posts, user_liked_posts: @user_liked_posts, following: @following, followers: @followers }
