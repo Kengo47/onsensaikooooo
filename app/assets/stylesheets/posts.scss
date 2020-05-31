@@ -81,6 +81,7 @@ $color-main: #A1232D;
   color: #494949!important;
   table-layout: fixed;
   width: 100%;
+  border: 1px solid #eee;
 }
 
 th {
@@ -89,7 +90,6 @@ th {
 }
 
 td {
-  width: 70%;
   word-wrap: break-word;
 }
 
@@ -216,4 +216,12 @@ td {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+// 検索
+.search-form {
+  border: 3px solid $color-main;
+  border-radius: 10px;
+  padding: 25px;
+  background-color: #eee;
 }

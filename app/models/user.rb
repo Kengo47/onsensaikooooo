@@ -62,4 +62,12 @@ class User < ApplicationRecord
     self.likes.exists?(post_id: post.id)
   end
 
+  # 検索機能のスコープ
+  scope :search, -> (search_params) do
+    return if search_params.blank?
+
+    name_like(search_params[:name])
+  end
+  scope :name_like, -> (name) { where('name LIKE ?', "%#{name}%") if name.present? }
+
 end

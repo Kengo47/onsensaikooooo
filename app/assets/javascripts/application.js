@@ -33,6 +33,18 @@ $(document).on('change', '#post_prefecture_id', function() {
   });
 });
 
+$(document).on('change', '#search_prefecture_id', function() {
+  return $.ajax({
+    type: 'GET',
+    url: '/posts/cities_select',
+    data: {
+      prefecture_id: $(this).val()
+    }
+  }).done(function(data) {
+    return $('#cities_select').html(data);
+  });
+});
+
 // 無限スクロール
 $(document).on('turbolinks:load', function() {
   $('.post-cards').infiniteScroll({
