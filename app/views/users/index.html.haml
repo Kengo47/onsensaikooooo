@@ -1,0 +1,18 @@
+%h1.mb-3 ユーザー一覧
+
+.row.user-cards
+  - @users.each do |user|
+    .user-card.col-lg-4.col-md-6.mb-3
+      .user-card-body.shadow
+        - if user.avatar?
+          = link_to image_tag(user.avatar.thumb.url, class: "user-avatar"), user
+        - else
+          = link_to image_tag("no_image.png", class: "user-avatar"), user
+        %p.mt-3{ style: "font-weight: bold;" }
+          =user.name
+        - if current_user.admin? && !(user.admin?) && !(user.email == "guest@example.com")
+          = link_to "削除する", user, data: { confirm: "本当に削除しますか？" }, method: :delete, class: "btn btn-outline-danger"
+
+= paginate @users
+
+= render 'shared/infinitescroll'

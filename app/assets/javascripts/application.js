@@ -41,7 +41,20 @@ $(document).on('turbolinks:load', function() {
     history: false,
     status: '.page-load-status',
     hideNav: 'nav ul.pagination',
-    button: '.view-more',
+    button: '.view-more-button',
+    scrollThreshold: false
+  });
+});
+
+// 無限スクロール(user)
+$(document).on('turbolinks:load', function() {
+  $('.user-cards').infiniteScroll({
+    path: 'nav ul.pagination a[rel=next]',
+    append: '.user-cards .user-card',
+    history: false,
+    status: '.page-load-status',
+    hideNav: 'nav ul.pagination',
+    button: '.view-more-button',
     scrollThreshold: false
   });
 });

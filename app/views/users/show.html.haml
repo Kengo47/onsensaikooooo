@@ -11,9 +11,13 @@
     %strong
       = @user.created_at.strftime('%Y/%m/%d')
 
-  - if @user.id == current_user.id
-    = link_to 'アカウント編集', edit_user_registration_path, class: "btn btn-outline-dark"
-  - else
-    = render partial: 'follow_form', locals: { user: @user }
+  - if user_signed_in?
+    - if @user.admin?
+      %p 管理ユーザーです。
+    - else
+      - if @user.id == current_user.id
+        = link_to 'アカウント編集', edit_user_registration_path, class: "btn btn-outline-dark"
+      - else
+        = render partial: 'follow_form', locals: { user: @user }
 
 = render partial: 'user_tabs', locals: { user: @user, user_posts: @user_posts, user_liked_posts: @user_liked_posts, following: @following, followers: @followers }
