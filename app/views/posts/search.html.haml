@@ -1,0 +1,17 @@
+.search-form
+  = form_with(scope: :search, url: search_posts_path, method: :get, local: true) do |f|
+    .row
+      .form-group.col-md-4
+        = f.label :name, "温泉の名前は？"
+        = f.text_field :name, value: @search_params[:name], class: "form-control"
+      .form-group.col-md-4
+        = f.label :prefecture_id, "都道府県は？"
+        = f.collection_select :prefecture_id, Prefecture.all, :id, :name, { include_blank: '選択してください', selected: @search_params[:prefecture_id] }, { class: "form-control" }
+      .form-group.col-md-4
+        = f.label :city_id, "市区町村は？"
+        #cities_select
+          = f.collection_select :city_id, City.where(prefecture_id: @search_params[:prefecture_id]), :id, :name, { include_blank: '選択してください', selected: @search_params[:city_id] }, { class: "form-control" }
+
+    = f.submit "検索する", class: "btn btn-danger"
+
+= render partial: "posts/posts_index", locals: { posts: @posts }

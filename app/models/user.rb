@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
-#  admin                  :boolean          default(FALSE)
 #  avatar                 :string(255)
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string(255)
@@ -62,5 +61,13 @@ class User < ApplicationRecord
   def already_liked?(post)
     self.likes.exists?(post_id: post.id)
   end
+
+  # 検索機能のスコープ
+  scope :search, -> (search_params) do
+    return if search_params.blank?
+
+    name_like(search_params[:name])
+  end
+  scope :name_like, -> (name) { where('name LIKE ?', "%#{name}%") if name.present? }
 
 end

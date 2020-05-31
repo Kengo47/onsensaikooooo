@@ -1,4 +1,9 @@
-%h1.mb-3 ユーザー一覧
+.search-form
+  = form_with(scope: :search, url: users_path, method: :get, local: true) do |f|
+    .form-group
+      = f.label :name, "ユーザーの名前は？"
+      = f.text_field :name, value: @search_params[:name], class: "form-control"
+    = f.submit "検索する", class: "btn btn-danger"
 
 .row.user-cards
   - @users.each do |user|

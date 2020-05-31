@@ -39,4 +39,16 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { maximum: 140 }
   validates :picture, presence: true
 
+  # 検索機能のスコープ
+  scope :search, -> (search_params) do
+    return if search_params.blank?
+
+    name_like(search_params[:name])
+      .prefecture_id_is(search_params[:prefecture_id])
+      .city_id_is(search_params[:city_id])
+  end
+  scope :name_like, -> (name) { where('name LIKE ?', "%#{name}%") if name.present? }
+  scope :prefecture_id_is, -> (prefecture_id) { where(prefecture_id: prefecture_id) if prefecture_id.present? }
+  scope :city_id_is, -> (city_id) { where(city_id: city_id) if city_id.present? }
+
 end
