@@ -7,6 +7,10 @@
       この温泉の思い出の詳細
     %table.table.mb-3
       %tr
+        %th 投稿者
+        %td
+          = link_to @post.user.name, @post.user
+      %tr
         %th 名前
         %td= @post.name
       %tr
@@ -28,9 +32,12 @@
           = render partial: 'likes/like', locals: { post: @post }
       .col-md-8
         #edit_area
-          - if current_user?(@post.user)
-            = link_to "編集", edit_post_path(@post), locals: { post: @post }, class: "btn-circle-border-simple3"
+          - if current_user.admin?
             = link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除して良いですか？" }, class: "btn-circle-border-simple3"
+          - else
+            - if current_user?(@post.user)
+              = link_to "編集", edit_post_path(@post), locals: { post: @post }, class: "btn-circle-border-simple3"
+              = link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除して良いですか？" }, class: "btn-circle-border-simple3"
 .row
   - if user_signed_in?
     .comment-create.mx-auto
