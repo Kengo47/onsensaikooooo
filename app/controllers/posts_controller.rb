@@ -50,6 +50,11 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    @search_params = post_search_params
+    @posts = Post.search(@search_params).page(params[:page]).per(6)
+  end
+
   private
 
     def post_params
@@ -58,5 +63,9 @@ class PostsController < ApplicationController
 
     def set_target_post
       @post = Post.find(params[:id])
+    end
+
+    def post_search_params
+      params.fetch(:search, {}).permit(:name, :prefecture_id, :city_id)
     end
 end

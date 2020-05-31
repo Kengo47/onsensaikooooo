@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :posts, only: [:new, :show, :create, :edit, :update, :destroy] do
     collection do
       get :cities_select
+      get :search
     end
     resources :comments, only: [:create, :destroy]
     resource :likes, only: [:create, :destroy]

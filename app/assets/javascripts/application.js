@@ -33,7 +33,19 @@ $(document).on('change', '#post_prefecture_id', function() {
   });
 });
 
-// 無限スクロール
+$(document).on('change', '#search_prefecture_id', function() {
+  return $.ajax({
+    type: 'GET',
+    url: '/posts/cities_select',
+    data: {
+      prefecture_id: $(this).val()
+    }
+  }).done(function(data) {
+    return $('#cities_select').html(data);
+  });
+});
+
+// 無限スクロール(post)
 $(document).on('turbolinks:load', function() {
   $('.post-cards').infiniteScroll({
     path: 'nav ul.pagination a[rel=next]',
@@ -41,7 +53,7 @@ $(document).on('turbolinks:load', function() {
     history: false,
     status: '.page-load-status',
     hideNav: 'nav ul.pagination',
-    button: '.view-more-button',
+    button: '.view-more',
     scrollThreshold: false
   });
 });

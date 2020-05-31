@@ -4,7 +4,8 @@ class UsersController < ApplicationController
   before_action :set_target_user, only: [:show, :destroy]
 
   def index
-    @users = User.page(params[:page]).per(6)
+    @search_params = user_search_params
+    @users = User.search(@search_params).page(params[:page]).per(5)
   end
 
   def show
@@ -28,5 +29,9 @@ class UsersController < ApplicationController
 
     def set_target_user
       @user = User.find(params[:id])
+    end
+
+    def user_search_params
+      params.fetch(:search, {}).permit(:name)
     end
 end
