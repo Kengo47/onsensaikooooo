@@ -8,21 +8,28 @@
   .collapse.navbar-collapse#navbarSupportedContent
     %ul.navbar-nav.mr-auto
       - if user_signed_in?
+        = header_link_item('投稿を探す', search_posts_path)
+        = header_link_item('人気の投稿', rank_posts_path)
         - if current_user.admin?
-          %li.nav-item.nav-link
-            = link_to '全てのユーザー', users_path
-        %li.nav-item.nav-link
-          = link_to '投稿', new_post_path
-        %li.nav-item.nav-link
-          = link_to '検索', search_posts_path
-        %li.nav-item.nav-link
-          = link_to '人気', rank_posts_path
-        %li.nav-item.nav-link
-          = link_to 'マイページ', current_user
-        %li.nav-item.nav-link
-          = link_to 'ログアウト', destroy_user_session_path, method: :delete
+          %li.nav-item
+            = link_to users_path, class: "nav-link" do
+              %i.fas.fa-users 全てのユーザー
       - else
-        %li.nav-item.nav-link
-          = link_to '新規登録', new_user_registration_path
-        %li.nav-item.nav-link
-          = link_to 'ログイン', new_user_session_path
+        = header_link_item('思い出を探す', search_posts_path)
+        = header_link_item('人気', rank_posts_path)
+
+    %ul.navbar-nav
+      - if user_signed_in?
+        %li.dropdown
+          = link_to "#{current_user.name}さんでログイン中", "#", { class: "dropdown-toggle nav-link", data: { toggle: "dropdown" }, role: "button" }
+          %ul.dropdown-menu{ role: "menu" }
+            %li= link_to 'マイページ', current_user, class: "dropdown-item"
+            %li= link_to '新規投稿', new_post_path, class: "dropdown-item"
+            %li= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "dropdown-item"
+      - else
+        %li.nav-item
+          = link_to new_user_registration_path, class: "nav-link" do
+            %i.fas.fa-user-plus 新規登録
+        %li.nav-item
+          = link_to new_user_session_path, class: "nav-link" do
+            %i.fas.fa-sign-in-alt ログイン
