@@ -70,3 +70,9 @@ $(document).on('turbolinks:load', function() {
     scrollThreshold: false
   });
 });
+
+$(document).on('turbolinks:load', function() {
+  if(!$("nav ul.pagination")[0]) {
+    $('.view-more-button').hide();
+  }
+});
