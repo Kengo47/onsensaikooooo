@@ -16,6 +16,8 @@
         %li.nav-item.nav-link
           = link_to '検索', search_posts_path
         %li.nav-item.nav-link
+          = link_to '人気', rank_posts_path
+        %li.nav-item.nav-link
           = link_to 'マイページ', current_user
         %li.nav-item.nav-link
           = link_to 'ログアウト', destroy_user_session_path, method: :delete

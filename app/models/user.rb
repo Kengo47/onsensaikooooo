@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  admin                  :boolean          default(FALSE)
 #  avatar                 :string(255)
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string(255)
@@ -60,6 +61,10 @@ class User < ApplicationRecord
   # いいねしているかどうかの判定
   def already_liked?(post)
     self.likes.exists?(post_id: post.id)
+  end
+
+  def like(post)
+    likes.find_or_create_by(post_id: post.id)
   end
 
   # 検索機能のスコープ

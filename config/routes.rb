@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     collection do
       get :cities_select
       get :search
+      get :rank
     end
     resources :comments, only: [:create, :destroy]
     resource :likes, only: [:create, :destroy]

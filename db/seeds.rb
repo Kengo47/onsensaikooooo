@@ -44,22 +44,41 @@ prefecture_id = city.prefecture_id
 city_id = city.id
 
 user.posts.create!(name: "七光台温泉",
-        prefecture_id: prefecture_id,
-        city_id: city_id,
-        body: "サンプル投稿です",
-        picture: open("#{Rails.root}/db/fixtures/1.jpg"))
+                    prefecture_id: prefecture_id,
+                    city_id: city_id,
+                    body: "サンプル投稿です",
+                    picture: open("#{Rails.root}/db/fixtures/1.jpg"))
 user.posts.create!(name: "七光台温泉",
-        prefecture_id: prefecture_id,
-        city_id: city_id,
-        body: "サンプル投稿です",
-        picture: open("#{Rails.root}/db/fixtures/2.jpg"))
+                    prefecture_id: 5,
+                    city_id: 303,
+                    body: "サンプル投稿です",
+                    picture: open("#{Rails.root}/db/fixtures/2.jpg"))
 user.posts.create!(name: "七光台温泉",
-        prefecture_id: prefecture_id,
-        city_id: city_id,
-        body: "サンプル投稿です",
-        picture: open("#{Rails.root}/db/fixtures/3.jpg"))
+                    prefecture_id: 17,
+                    city_id: 837,
+                    body: "サンプル投稿です",
+                    picture: open("#{Rails.root}/db/fixtures/3.jpg"))
 user.posts.create!(name: "七光台温泉",
-        prefecture_id: prefecture_id,
-        city_id: city_id,
-        body: "サンプル投稿です",
-        picture: open("#{Rails.root}/db/fixtures/3.jpg"))
+                    prefecture_id: 35,
+                    city_id: 1499,
+                    body: "サンプル投稿です",
+                    picture: open("#{Rails.root}/db/fixtures/1.jpg"))
+user.posts.create!(name: "七光台温泉",
+                    prefecture_id: 40,
+                    city_id: 1615,
+                    body: "サンプル投稿です",
+                    picture: open("#{Rails.root}/db/fixtures/2.jpg"))
+user.posts.create!(name: "七光台温泉",
+                    prefecture_id: 47,
+                    city_id: 1856,
+                    body: "サンプル投稿です",
+                    picture: open("#{Rails.root}/db/fixtures/3.jpg"))
+
+# お気に入りデータ作成
+users = User.order(:id).take(7)
+posts = Post.order(:id).take(6)
+users.each do |user|
+  posts.each do |post|
+    user.like(post) unless user.id == post.user_id
+  end
+end
