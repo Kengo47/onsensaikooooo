@@ -1,7 +1,9 @@
+%h1.title-text.mb-3 全てのユーザー
+
 .search-form.mb-3
   = form_with(scope: :search, url: users_path, method: :get, local: true) do |f|
     .form-group.user-search.mx-auto
-      = f.label :name, "ユーザーの名前は？"
+      = f.label :name, "お探しのユーザーは？"
       = f.text_field :name, value: @search_params[:name], class: "form-control"
     = f.submit "検索する", class: "btn btn-danger"
 
