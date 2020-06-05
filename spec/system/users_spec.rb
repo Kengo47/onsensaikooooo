@@ -12,7 +12,7 @@ RSpec.describe 'User', type: :system do
     visit new_user_session_path
 
     # ログインする
-    fill_in 'メールアドレス', with: @user.email
+    fill_in 'メールアドレス', with: @user.name
     fill_in 'パスワード', with: @user.password
 
     click_button 'ログイン'
