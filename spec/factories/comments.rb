@@ -22,7 +22,7 @@
 FactoryBot.define do
   factory :comment do
     comment { "MyText" }
-    user { nil }
-    post { nil }
+    association :post
+    user { post.user }
   end
 end

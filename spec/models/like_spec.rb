@@ -21,5 +21,31 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:like) { create(:like) }
+
+  it 'ファクトリが有効である' do
+    expect(like).to be_valid
+  end
+
+  it 'いいねにはユーザー, ポストが必要' do
+    user = create(:user)
+    post = create(:post)
+    like = Like.new(
+      user: user,
+      post: post
+    )
+    expect(like).to be_valid
+  end
+
+  describe '存在性の検証' do
+    it 'ユーザーが無いと無効' do
+      like.user = nil
+      expect(like).to_not be_valid
+    end
+
+    it 'ポストが無いと無効' do
+      like.post = nil
+      expect(like).to_not be_valid
+    end
+  end
 end
