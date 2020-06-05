@@ -18,7 +18,7 @@
 #
 FactoryBot.define do
   factory :city do
-    name { "MyString" }
-    prefecture { nil }
+    name { "野田市" }
+    association :prefecture
   end
 end
