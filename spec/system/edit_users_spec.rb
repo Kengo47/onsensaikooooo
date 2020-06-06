@@ -8,7 +8,7 @@ RSpec.describe 'User', type: :system do
                         confirmed_at: Date.today)
   end
 
-  it 'ユーザープロフィールを編集する' do
+  it 'ユーザープロフィールを編集する', js: true do
     visit new_user_session_path
 
     # ログインする
