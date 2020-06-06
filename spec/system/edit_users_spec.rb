@@ -8,7 +8,7 @@ RSpec.describe 'User', type: :system do
                         confirmed_at: Date.today)
   end
 
-  it 'ユーザープロフィールを編集する' do
+  it 'ユーザープロフィールを編集する', js: true do
     visit new_user_session_path
 
     # ログインする
@@ -33,7 +33,7 @@ RSpec.describe 'User', type: :system do
     click_button '更新する'
     expect(current_path).to eq user_path(@user)
     expect(page).to have_content 'アカウント情報を変更しました。'
+    @user.reload
     expect(page).to have_content "#{@user.name}"
-
   end
 end
