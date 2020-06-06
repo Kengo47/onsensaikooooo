@@ -68,4 +68,22 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
+
+  # RSpecによる画像をテスト後に削除する
+  config.after(:all) do
+    if Rails.env.test?
+      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads_#{Rails.env}/"])
+    end
+  end
+
+  # Docker上でchromeをheadless modeで動かす
+  config.before(:each) do |example|
+    if example.metadata[:type] == :system
+      if example.metadata[:js]
+        driven_by :selenium_chrome_headless
+      else
+        driven_by :rack_test
+      end
+    end
+  end
 end

@@ -30,5 +30,25 @@ FactoryBot.define do
     sequence(:email) { |n| "test-#{n}@example.com" }
     password { "password" }
     confirmed_at { Date.today }
+
+    trait :guest do
+      name     { 'Guest User' }
+      email    { 'guest@example.com' }
+      password { '123456' }
+    end
+
+    trait :admin do
+      name     { 'Admin User' }
+      email    { 'admin@example.com' }
+      password { '123456' }
+      admin    { true }
+    end
+
+    trait :unconfirmed_user do
+      name  { 'メール未認証' }
+      email { 'unconfirmed@user.com' }
+      password { 'password' }
+      confirmed_at { nil }
+    end
   end
 end

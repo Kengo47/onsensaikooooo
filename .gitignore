@@ -25,7 +25,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/.DS_Store
 config/settings.yml
 config/settings.local.yml
 config/settings/*.local.yml
@@ -33,3 +32,4 @@ config/environments/*.local.yml
 # アップロードされたテスト画像を無視する
 /public/uploads
 
+.DS_Store
