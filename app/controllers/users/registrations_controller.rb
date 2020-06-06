@@ -15,9 +15,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    if current_user.admin?
+      redirect_to root_url
+    else
+      super
+    end
+  end
 
   # PUT /resource
   # def update
