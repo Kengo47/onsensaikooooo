@@ -42,7 +42,7 @@ RSpec.describe Post, type: :model do
       name: '七光台温泉',
       prefecture: prefecture,
       city: city,
-      picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpg')),
+      picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.png')),
       body: '最高の地元の温泉',
       user: user
     )

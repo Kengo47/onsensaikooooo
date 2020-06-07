@@ -28,7 +28,7 @@ RSpec.describe 'Post', type: :system, js: true do
     fill_in '温泉の名前は？（20文字以内）', with: 'テスト温泉'
     select '千葉県', from: '都道府県'
     select '野田市', from: '市区町村'
-    attach_file 'post[picture]', "#{Rails.root}/spec/fixtures/test.jpg", make_visible: true
+    attach_file 'post[picture]', "#{Rails.root}/spec/fixtures/test.png", make_visible: true
     fill_in 'どんな思い出？（140文字以内）', with: 'テスト温泉についてです。'
     click_button '追加！'
 

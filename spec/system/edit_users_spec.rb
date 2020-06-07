@@ -27,7 +27,7 @@ RSpec.describe 'User', type: :system do
     expect(current_path).to eq edit_user_registration_path
     expect(page).to have_content 'プロフィール編集'
 
-    attach_file 'user[avatar]', "#{Rails.root}/spec/fixtures/test.jpg", make_visible: true
+    attach_file 'user[avatar]', "#{Rails.root}/spec/fixtures/test.png", make_visible: true
     fill_in 'ニックネーム（１５文字以内）', with: 'Modify User'
     fill_in 'メールアドレス', with: 'modify@example.com'
     click_button '更新する'
