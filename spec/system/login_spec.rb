@@ -89,12 +89,6 @@ RSpec.describe 'Login', type: :system do
   end
 
   describe '未ログイン状態のリダイレクト' do
-    it 'ユーザー詳細ページにアクセスできない' do
-      visit user_path(user)
-      expect(current_path).to eq new_user_session_path
-      expect(page).to have_content 'アカウント登録もしくはログインしてください。'
-    end
-
     it '新規投稿ページにアクセスできない' do
       visit new_post_path
       expect(current_path).to eq new_user_session_path

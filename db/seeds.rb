@@ -25,7 +25,8 @@ User.create!(name: "Guest User",
     email: "test#{n + 1}@test.com",
     name: "テスト太郎#{n + 1}",
     password: 'password',
-    confirmed_at: Time.now
+    confirmed_at: Time.now,
+    avatar: open("#{Rails.root}/db/fixtures/avatar-test#{n + 1}.png")
   )
 end
 

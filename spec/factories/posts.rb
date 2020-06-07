@@ -31,7 +31,7 @@ FactoryBot.define do
     body { "地元の温泉で、最高です。" }
     prefecture_id { 1 }
     city_id { 1 }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpg')) }
+    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.png')) }
     association :user
   end
 end

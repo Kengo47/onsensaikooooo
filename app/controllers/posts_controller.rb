@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_target_post, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -24,7 +25,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-    # @post.picture.cache! unless @post.picture.blank?
   end
 
   def update
@@ -63,6 +63,10 @@ class PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:name, :body, :picture, :picture_cache, :prefecture_id, :city_id)
+    end
+
+    def correct_user
+      redirect_to(root_url) unless (@post.user == current_user) || current_user.admin?
     end
 
     def set_target_post
