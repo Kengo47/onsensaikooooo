@@ -16,6 +16,7 @@ RSpec.describe 'User', type: :system do
     fill_in 'パスワード', with: @user.password
 
     click_button 'ログイン'
+    page.driver.browser.switch_to.alert.accept
     expect(current_path).to eq root_path
 
     click_link "#{@user.name}さんでログイン中"

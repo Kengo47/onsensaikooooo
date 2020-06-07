@@ -23,6 +23,7 @@ RSpec.describe 'Search', type: :system do
 
   before '投稿検索ページへ移動する' do
     visit root_path
+    page.driver.browser.switch_to.alert.accept
     click_link '思い出を探す'
     expect(current_path).to eq search_posts_path
   end

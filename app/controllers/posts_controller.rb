@@ -41,7 +41,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     flash[:notice] = "投稿削除しました！"
-    redirect_to root_url
+    redirect_to search_posts_url
   end
 
   def cities_select
@@ -66,7 +66,7 @@ class PostsController < ApplicationController
     end
 
     def correct_user
-      redirect_to(root_url) unless (@post.user == current_user) || current_user.admin?
+      redirect_back(fallback_location: user_url(current_user)) unless (@post.user == current_user) || current_user.admin?
     end
 
     def set_target_post

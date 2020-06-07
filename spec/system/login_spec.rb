@@ -111,7 +111,7 @@ RSpec.describe 'Login', type: :system do
 
       click_link "#{user.name}さんでログイン中"
       click_link 'ログアウト'
-      expect(current_path).to eq root_path
+      expect(current_path).to eq search_posts_path
       expect(page).to have_content 'ログアウトしました。'
     end
   end

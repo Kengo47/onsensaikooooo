@@ -7,6 +7,7 @@ RSpec.describe 'Post', type: :system, js: true do
     fill_in 'メールアドレス', with: user.email
     fill_in 'パスワード', with: user.password
     click_button 'ログイン'
+    page.driver.browser.switch_to.alert.accept
   end
 
   it '新規投稿ページの要素が正しく表示される' do
@@ -66,7 +67,7 @@ RSpec.describe 'Post', type: :system, js: true do
       page.accept_confirm '本当に削除して良いですか？'
       expect(page).to have_content '投稿削除しました！'
     }.to change(Post, :count).by(-1)
-    expect(current_path).to eq root_path
+    expect(current_path).to eq search_posts_path
     expect(Post.where(id: post.id)).to be_empty
   end
 
@@ -81,6 +82,6 @@ RSpec.describe 'Post', type: :system, js: true do
 
     # 他人の編集はできない
     visit edit_post_path(other_post)
-    expect(current_path).to eq root_path
+    expect(current_path).to eq user_path(user)
   end
 end
