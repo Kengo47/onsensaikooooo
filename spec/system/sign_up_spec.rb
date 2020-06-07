@@ -6,7 +6,7 @@ RSpec.describe 'Sing_up', type: :system do
   it '新規登録ページの要素検証' do
     visit signup_path
     expect(page).to have_content '会員情報の入力'
-    expect(page).to have_field 'ニックネーム（１０文字以内）'
+    expect(page).to have_field 'ニックネーム（１５文字以内）'
     expect(page).to have_field 'メールアドレス'
     expect(page).to have_field 'パスワード（６文字以上）'
     expect(page).to have_field '確認用パスワード'
@@ -17,7 +17,7 @@ RSpec.describe 'Sing_up', type: :system do
   describe 'ユーザー新規登録' do
     it '各入力欄に適切な値が入力されていない新規登録を許可しない' do
       visit signup_path
-      fill_in 'ニックネーム（１０文字以内）', with: ' '
+      fill_in 'ニックネーム（１５文字以内）', with: ' '
       fill_in 'メールアドレス', with: 'user@invalid'
       fill_in 'パスワード（６文字以上）', with: 'foo'
       fill_in '確認用パスワード', with: 'bar'
@@ -27,7 +27,7 @@ RSpec.describe 'Sing_up', type: :system do
 
     it '登録済みニックネーム' do
       visit signup_path
-      fill_in 'ニックネーム（１０文字以内）', with: user.name
+      fill_in 'ニックネーム（１５文字以内）', with: user.name
       fill_in 'メールアドレス', with: 'test@example.com'
       fill_in 'パスワード（６文字以上）', with: 'password'
       fill_in '確認用パスワード', with: 'password'
@@ -38,7 +38,7 @@ RSpec.describe 'Sing_up', type: :system do
 
     it '登録済みメールアドレス' do
       visit signup_path
-      fill_in 'ニックネーム（１０文字以内）', with: 'test-user'
+      fill_in 'ニックネーム（１５文字以内）', with: 'test-user'
       fill_in 'メールアドレス', with: user.email
       fill_in 'パスワード（６文字以上）', with: 'password'
       fill_in '確認用パスワード', with: 'password'
@@ -49,7 +49,7 @@ RSpec.describe 'Sing_up', type: :system do
 
     it 'ユーザーを新規登録可能' do
       visit signup_path
-      fill_in 'ニックネーム（１０文字以内）', with: 'test-user'
+      fill_in 'ニックネーム（１５文字以内）', with: 'test-user'
       fill_in 'メールアドレス', with: 'test@example.com'
       fill_in 'パスワード（６文字以上）', with: 'password'
       fill_in '確認用パスワード', with: 'password'

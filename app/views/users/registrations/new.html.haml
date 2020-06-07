@@ -3,9 +3,9 @@
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = bootstrap_devise_error_messages!
     .form-group.mt-4
-      = f.label :name, "ニックネーム（１０文字以内）"
+      = f.label :name, "ニックネーム（１５文字以内）"
       %br/
-      = f.text_field :name, autofocus: true, required: true, maxlength: '10', class: "form-control"
+      = f.text_field :name, autofocus: true, required: true, maxlength: '15', class: "form-control"
     .form-group
       = f.label :email
       %br/

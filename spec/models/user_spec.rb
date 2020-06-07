@@ -68,8 +68,8 @@ RSpec.describe User, type: :model do
   end
 
   describe '文字数の検証' do
-    it 'nameが10文字以上は無効' do
-      @user.name = 'a' * 11
+    it 'nameが15文字以上は無効' do
+      @user.name = 'a' * 16
       expect(@user).to_not be_valid
     end
 

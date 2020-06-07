@@ -8,7 +8,7 @@ RSpec.describe 'User', type: :system do
                         confirmed_at: Date.today)
   end
 
-  it 'ユーザープロフィールを編集する' do
+  it 'ユーザープロフィールを編集する', js: true do
     visit new_user_session_path
 
     # ログインする
@@ -27,8 +27,8 @@ RSpec.describe 'User', type: :system do
     expect(current_path).to eq edit_user_registration_path
     expect(page).to have_content 'プロフィール編集'
 
-    # attach_file 'user[avatar]', "#{Rails.root}/spec/fixtures/test.jpg", make_visible: true
-    fill_in 'ニックネーム（１０文字以内）', with: 'ModifyUser'
+    attach_file 'user[avatar]', "#{Rails.root}/spec/fixtures/test.jpg", make_visible: true
+    fill_in 'ニックネーム（１５文字以内）', with: 'Modify User'
     fill_in 'メールアドレス', with: 'modify@example.com'
     click_button '更新する'
     expect(current_path).to eq user_path(@user)

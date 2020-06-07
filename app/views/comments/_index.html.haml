@@ -1,5 +1,6 @@
-= comments.count
-件コメント
+- if comments.any?
+  = comments.count
+  つのコメント
 - if comments.any?
   - comments.each do |comment|
     .comment-container

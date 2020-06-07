@@ -12,11 +12,11 @@
       = f.file_field :avatar, accept: 'image/jpeg, image/png', style: "display:none;", id: "file", class: "image"
       = f.hidden_field :avatar_cache
     .form-group
-      = f.label :name, "ニックネーム（１０文字以内）"
+      = f.label :name, "ニックネーム（１５文字以内）"
       - if current_user.email == "guest@example.com"
-        = f.text_field :name, required: true, maxlength: '10', disabled: true, class: "form-control"
+        = f.text_field :name, required: true, maxlength: '15', disabled: true, class: "form-control"
       - else
-        = f.text_field :name, required: true, maxlength: '10', class: "form-control"
+        = f.text_field :name, required: true, maxlength: '15', class: "form-control"
     .form-group
       = f.label :email
       - if current_user.email == "guest@example.com"
