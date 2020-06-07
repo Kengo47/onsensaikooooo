@@ -11,6 +11,7 @@ RSpec.describe 'Relationship', type: :system, js: true do
     fill_in 'メールアドレス', with: konoka.email
     fill_in 'パスワード', with: konoka.password
     click_button 'ログイン'
+    page.driver.browser.switch_to.alert.accept
 
     # naoのページは移動する
     click_link '思い出を探す'

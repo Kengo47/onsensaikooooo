@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
       devise_parameter_sanitizer.permit(:account_update, keys: [:name, :avatar, :avatar_cache])
     end
+
+    # ログアウト後のリダイレクト先
+    def after_sign_out_path_for(resource)
+      search_posts_path
+    end
 end

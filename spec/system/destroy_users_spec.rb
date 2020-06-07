@@ -3,12 +3,13 @@ require 'rails_helper'
 RSpec.describe 'Destroy', type: :system do
   let!(:user) { create(:user) }
 
-  describe '通常ユーザーのアカウント削除' do
+  describe '通常ユーザーのアカウント削除', js: true do
     before '通常ユーザーとしてログイン' do
       visit new_user_session_path
       fill_in 'メールアドレス', with: user.email
       fill_in 'パスワード', with: user.password
       click_button 'ログイン'
+      page.driver.browser.switch_to.alert.accept
     end
 
     it '自分のアカウントを削除できる', js: true do
@@ -27,7 +28,7 @@ RSpec.describe 'Destroy', type: :system do
 
     it 'ユーザー検索ページにいけない' do
       visit users_path
-      expect(current_path).to eq root_path
+      expect(current_path).to eq user_path(user)
     end
   end
 
@@ -71,6 +72,7 @@ RSpec.describe 'Destroy', type: :system do
     end
 
     it 'ユーザー検索ページからユーザーを削除できる', js: true do
+      page.driver.browser.switch_to.alert.accept
       click_link '全てのユーザー'
       expect(current_path).to eq users_path
 

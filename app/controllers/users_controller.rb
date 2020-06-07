@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   private
 
     def admin_user
-      redirect_to root_url unless current_user.admin?
+      redirect_back(fallback_location: user_url(current_user)) unless current_user.admin?
     end
 
     def set_target_user
