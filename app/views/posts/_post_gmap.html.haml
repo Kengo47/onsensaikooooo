@@ -1,0 +1,17 @@
+#map.mt-3{ style: "width: 100%; height: 400px;" }
+
+:javascript
+  function initMap() {
+    var latLng ={ lat: #{post.latitude}, lng: #{post.longitude} };
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom : 13,
+      center : latLng
+    });
+
+    var marker = new google.maps.Marker({
+      position : latLng,
+      map : map,
+    });
+  }
+
+%script{ src: "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google[:api]}&callback=initMap" }

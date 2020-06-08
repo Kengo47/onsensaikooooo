@@ -4,6 +4,8 @@
 #
 #  id            :bigint           not null, primary key
 #  body          :text(65535)
+#  latitude      :float(24)
+#  longitude     :float(24)
 #  name          :string(255)      not null
 #  picture       :string(255)
 #  created_at    :datetime         not null
@@ -34,6 +36,8 @@ class Post < ApplicationRecord
   has_many :liked_users, through: :likes, source: :user
   default_scope -> { order(created_at: :desc) }
   mount_uploader :picture, PictureUploader
+  geocoded_by :name
+  after_validation :geocode
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 20 }
   validates :body, presence: true, length: { maximum: 140 }
