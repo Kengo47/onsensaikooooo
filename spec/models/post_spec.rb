@@ -4,6 +4,8 @@
 #
 #  id            :bigint           not null, primary key
 #  body          :text(65535)
+#  latitude      :float(24)
+#  longitude     :float(24)
 #  name          :string(255)      not null
 #  picture       :string(255)
 #  created_at    :datetime         not null

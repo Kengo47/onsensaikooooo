@@ -1,13 +1,13 @@
 %ul.nav.nav-tabs.justify-content-center.mt-3
   %li.nav-item
     %a{ href: '#tab1', class: 'nav-link active n-l-item', 'data-toggle' => 'tab' }
-      地図上でみんなの思い出を見よう！
+      コメント
   %li.nav-item
     %a{ href: '#tab2', class: 'nav-link n-l-item', 'data-toggle' => 'tab' }
-      一覧でみんなの思い出を見よう！
+      地図
 
 .tab-content
   #tab1.tab-pane.active
-    = render partial: 'gmap', locals: { posts: posts }
+    = render partial: 'post_comments', locals: { comment: comment, comments: comments, post: post }
   #tab2.tab-pane
-    = render partial: 'posts/posts_index', locals: { posts: posts }
+    = render partial: 'post_gmap', locals: { post: post }

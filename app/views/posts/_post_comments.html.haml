@@ -1,0 +1,10 @@
+.row.mt-3
+  - if user_signed_in?
+    .comment-create.mx-auto
+      %h3.text-left コメントを投稿する
+      = render partial: 'comments/form', locals: { comment: comment, post: post }
+.row
+  .comment-index.mx-auto
+    %h3.text-left.comment-titleコメント
+  #comments-area.mx-auto
+    = render partial: 'comments/index', locals: { comments: comments }
