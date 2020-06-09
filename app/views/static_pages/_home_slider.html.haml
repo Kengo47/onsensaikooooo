@@ -1,0 +1,25 @@
+.row
+  %ul.slider.col-sm-12.mx-auto
+    %li
+      = image_tag '/assets/onsen-1.jpg', class: 'slick-img'
+    %li
+      = image_tag '/assets/onsen-2.jpg', class: 'slick-img'
+    %li
+      = image_tag '/assets/onsen-3.jpg', class: 'slick-img'
+    %li
+      = image_tag '/assets/onsen-4.jpg', class: 'slick-img'
+    %li
+      = image_tag '/assets/onsen-5.jpg', class: 'slick-img'
+
+:javascript
+  $(document).on('turbolinks:load', function() {
+    $('.slider').slick({
+      dots: true,
+      autoplay: true,
+      autoplaySpeed: 2000
+    });
+
+    $('.slick-dots li').on('mouseover', function() {
+      $('.slider').slick('goTo', $(this).index());
+    });
+  });

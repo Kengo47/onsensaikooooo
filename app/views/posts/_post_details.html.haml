@@ -1,0 +1,22 @@
+%table.table.mb-3
+  %tr
+    %th 投稿者
+    %td
+      = link_to post.user.name, post.user
+  %tr
+    %th 名前
+    %td= post.name
+  %tr
+    %th 場所
+    %td
+      = post.prefecture.name
+      = post.city.name
+  %tr
+    %th 詳細
+    %td= post.body
+  %tr
+    %th お気に入りされた数
+    %td
+      #likes_count
+        = post.likes.count
+        件
