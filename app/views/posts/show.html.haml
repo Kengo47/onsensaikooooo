@@ -5,40 +5,15 @@
   .col-md-6
     %h3.post-title.text-left.mb-5
       この温泉の思い出の詳細
-    %table.table.mb-3
-      %tr
-        %th 投稿者
-        %td
-          = link_to @post.user.name, @post.user
-      %tr
-        %th 名前
-        %td= @post.name
-      %tr
-        %th 場所
-        %td
-          = @post.prefecture.name
-          = @post.city.name
-      %tr
-        %th 詳細
-        %td= @post.body
-      %tr
-        %th お気に入りされた数
-        %td
-          #likes_count
-            = @post.likes.count
-            件
+
+    = render partial: 'post_details', locals: { post: @post }
+
     .row
       .col-md-4
         #like_area
           = render partial: 'likes/like', locals: { post: @post }
       .col-md-8
         #edit_area
-          - if user_signed_in?
-            - if current_user.admin?
-              = link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除して良いですか？" }, class: "btn-circle-border-simple3"
-            - else
-              - if current_user?(@post.user)
-                = link_to "編集", edit_post_path(@post), locals: { post: @post }, class: "btn-circle-border-simple3"
-                = link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除して良いですか？" }, class: "btn-circle-border-simple3"
+          = render partial: 'post_edit_area', locals: { post: @post }
 
 = render partial: 'post_tabs', locals: { comment: @comment, comments: @comments, post: @post }
