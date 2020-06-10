@@ -47,6 +47,8 @@ GEM
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
+    antivirus (0.0.2)
+      rails
     arel (9.0.0)
     ast (2.4.0)
     autoprefixer-rails (9.7.6)
@@ -358,6 +360,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  antivirus
   bootsnap (>= 1.1.0)
   bootstrap
   byebug
