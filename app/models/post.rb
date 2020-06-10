@@ -40,7 +40,7 @@ class Post < ApplicationRecord
   after_validation :geocode
   validates :user_id, presence: true
   validates :name, presence: true, length: { maximum: 20 }
-  validates :body, presence: true, length: { maximum: 140 }
+  validates :body, presence: true, length: { maximum: 140 }, profanity_filter: true
   validates :picture, presence: true
 
   # 検索機能のスコープ

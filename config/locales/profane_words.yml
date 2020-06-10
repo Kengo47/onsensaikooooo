@@ -1,0 +1,8 @@
+ja:
+  antivirus:
+    message: に不適切な単語が含まれています
+    profane_words:
+      - バカ
+      - アホ
+      - マヌケ
+      - うんこ
