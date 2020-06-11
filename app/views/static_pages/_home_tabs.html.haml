@@ -5,9 +5,16 @@
   %li.nav-item
     %a{ href: '#tab2', class: 'nav-link n-l-item', 'data-toggle' => 'tab' }
       一覧でみんなの思い出を見よう！
+  %li.nav-item
+    %a{ href: '#tab3', class: 'nav-link n-l-item', 'data-toggle' => 'tab' }
+      どの県が多く投稿されているかな？
 
 .tab-content
   #tab1.tab-pane.active
     = render partial: 'gmap', locals: { posts: posts }
+
   #tab2.tab-pane
     = render partial: 'posts/posts_index', locals: { posts: posts }
+
+  #tab3.tab-pane
+    = pie_chart @chart

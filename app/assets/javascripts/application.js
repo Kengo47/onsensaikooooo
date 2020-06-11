@@ -18,6 +18,8 @@
 //= require popper
 //= require bootstrap
 //= require infinite-scroll.pkgd.min
+//= require Chart.bundle
+//= require chartkick
 //= require_tree .
 
 // Prefectureセレクトボックスに連動してCityセレクトボックスを変更する

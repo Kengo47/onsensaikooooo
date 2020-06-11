@@ -67,6 +67,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'antivirus'
 gem 'bootstrap'
 gem 'carrierwave'
+gem 'chartable'
+gem 'chartkick'
 gem 'config'
 gem 'devise'
 gem 'devise-i18n'
