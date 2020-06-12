@@ -52,11 +52,11 @@ class PostsController < ApplicationController
 
   def search
     @search_params = post_search_params
-    @posts = Post.search(@search_params).page(params[:page]).per(6).includes(:user, :prefecture, :city)
+    @posts = Post.search(@search_params).page(params[:page]).per(12).includes(:user, :prefecture, :city)
   end
 
   def rank
-    @rank_posts = Post.unscoped.joins(:likes).group(:post_id).order('count(post_id) desc').page(params[:page]).per(6).includes(:user, :prefecture, :city)
+    @rank_posts = Post.unscoped.joins(:likes).group(:post_id).order('count(post_id) desc').page(params[:page]).per(12).includes(:user, :prefecture, :city)
   end
 
   private
