@@ -28,3 +28,4 @@ COPY Gemfile.lock /myapp/Gemfile.lock
 # Gemのインストール実行
 RUN bundle install
 COPY . /myapp
+RUN mkdir -p tmp/sockets

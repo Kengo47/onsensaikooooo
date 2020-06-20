@@ -10,8 +10,8 @@ services:
       - .:/myapp:cached
       # cachedは、コンテナからホストへの書き込みはすぐだが、ホストからコンテナへの書き込みは遅延が許可される
       - public-data:/myapp/public
-      - tmp-data:/myapp/tmp
-      - log-data:/myapp/log
+      - sockets:/myapp/tmp/sockets
+      # - log-data:/myapp/log
     ports:
       - "3000:3000"
     # dbコンテナが先に起動するよう設定
@@ -41,13 +41,14 @@ services:
       context: containers/nginx
     volumes:
       - public-data:/myapp/public
-      - tmp-data:/myapp/tmp
+      - sockets:/myapp/tmp/sockets
     ports:
       - "80:80"
     depends_on:
       - web
 volumes:
+  sockets:
   public-data:
-  tmp-data:
-  log-data:
-  db-data:
+  # tmp-data:
+  # log-data:
+  # db-data:
