@@ -68,4 +68,7 @@ jobs:
           path: /tmp/test-results
           destination: test-results
 
-# # 以下自動デプロイの記述を追加する
+      # capistrano
+      - add_ssh_keys:
+          fingerprints:
+            - "49:10:94:5f:9b:fd:06:65:a8:52:4c:de:a6:c8:09:fa"

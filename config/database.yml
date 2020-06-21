@@ -49,7 +49,7 @@ test:
 #
 production:
   <<: *default
-  host: onsen-db.c0rhsqrsdere.ap-northeast-1.rds.amazonaws.com
-  database: onsen-db
-  username: root
-  password: password
+  host: <%= ENV['DB_HOST'] %>
+  database: <%= ENV['DB_DATABASE'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
