@@ -110,14 +110,14 @@ namespace :deploy do
 end
 
 namespace :setup do
-  desc 'setup config'
-  task :config do
-    on roles(:app) do |host|
-      %w[master.key database.yml].each do |f|
-        upload! "config/#{f}", "#{shared_path}/config/#{f}"
-      end
-    end
-  end
+  # desc 'setup config'
+  # task :config do
+  #   on roles(:app) do |host|
+  #     %w[master.key database.yml].each do |f|
+  #       upload! "config/#{f}", "#{shared_path}/config/#{f}"
+  #     end
+  #   end
+  # end
 
   desc 'setup nginx'
   task :nginx do
