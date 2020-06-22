@@ -66,6 +66,6 @@ server '54.168.94.193',
   port: 22,
   ssh_options: {
     user: 'kengo',
-    keys: [File.expand_path('~/.ssh/id_rsa')],
+    keys: [File.expand_path('~/.ssh/id_rsa_477b252c79df02cce135d573486c70ba')],
     forward_agent: true
   }
