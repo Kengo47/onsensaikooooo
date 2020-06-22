@@ -103,21 +103,21 @@ namespace :deploy do
   # end
 
   before :starting,     :check_revision
-  before :check,        'setup:config'
+  # before :check,        'setup:config'
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
-  after  :migrate,      :seed
+  # after  :migrate,      :seed
 end
 
 namespace :setup do
-  desc 'setup config'
-  task :config do
-    on roles(:app) do |host|
-      %w[master.key database.yml].each do |f|
-        upload! "config/#{f}", "#{shared_path}/config/#{f}"
-      end
-    end
-  end
+  # desc 'setup config'
+  # task :config do
+  #   on roles(:app) do |host|
+  #     %w[master.key database.yml].each do |f|
+  #       upload! "config/#{f}", "#{shared_path}/config/#{f}"
+  #     end
+  #   end
+  # end
 
   desc 'setup nginx'
   task :nginx do
