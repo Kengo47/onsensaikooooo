@@ -4,9 +4,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   process resize_to_fill: [500, 500, 'Center']
 
-  # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :fog
+  if Rails.env.development? || Rails.env.test?
+    storage :file
+  else
+    storage :fog
+  end
 
   def size_range
     1..5.megabytes
