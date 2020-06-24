@@ -92,21 +92,21 @@ namespace :deploy do
   end
 
   desc 'reload the database with seed data'
-  task :seed do
-    on roles(:db) do
-      with rails_env: fetch(:rails_env) do
-        within release_path do
-          execute :bundle, :exec, :rake, 'db:seed'
-        end
-      end
-    end
-  end
+  # task :seed do
+  #   on roles(:db) do
+  #     with rails_env: fetch(:rails_env) do
+  #       within release_path do
+  #         execute :bundle, :exec, :rake, 'db:seed'
+  #       end
+  #     end
+  #   end
+  # end
 
   before :starting,     :check_revision
   # before :check,        'setup:config'
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
-  after  :migrate,      :seed
+  # after  :migrate,      :seed
 end
 
 namespace :setup do
