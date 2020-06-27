@@ -44,6 +44,7 @@ user2 = User.second
 user3 = User.third
 user4 = User.fourth
 user5 = User.fifth
+user6 = User.find_by(name: "Guest User")
 
 user1.posts.create!(name: "登別温泉",
                     prefecture_id: 1,
@@ -282,10 +283,19 @@ user6.posts.create!(name: "那覇天然温泉",
                     picture: open("#{Rails.root}/db/fixtures/posts/47.jpg"))
 
 # お気に入りデータ作成
-users = User.order(:id).take(7)
-posts = Post.order(:id).take(6)
+users = User.order(:id).take(6)
+posts = Post.order(:id).take(20)
 users.each do |user|
   posts.each do |post|
     user.like(post) unless user.id == post.user_id
+  end
+end
+
+# コメントデータ作成
+users = User.order(:id).take(6)
+posts = Post.order(:id).take(6)
+users.each do |user|
+  posts.each do |post|
+    post.comments.create(user_id: user.id, comment: "最高ですね！") unless user.id == post.user_id
   end
 end
