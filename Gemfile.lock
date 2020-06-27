@@ -52,6 +52,11 @@ GEM
     antivirus (0.0.2)
       rails
     arel (9.0.0)
+    asset_sync (2.12.1)
+      activemodel (>= 4.1.0)
+      fog-core
+      mime-types (>= 2.99)
+      unf
     ast (2.4.0)
     autoprefixer-rails (9.7.6)
       execjs
@@ -412,6 +417,9 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.7)
     unicode-display_width (1.7.0)
     warden (1.2.8)
       rack (>= 2.0.6)
@@ -432,6 +440,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   antivirus
+  asset_sync
   aws-sdk-rails
   bcrypt_pbkdf
   bootsnap (>= 1.1.0)
