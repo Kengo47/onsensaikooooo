@@ -18,5 +18,5 @@
 #
 class City < ApplicationRecord
   belongs_to :prefecture
-  has_many :posts
+  has_many :posts, dependent: :destroy
 end

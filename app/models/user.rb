@@ -22,6 +22,7 @@
 #
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_name                  (name) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
@@ -29,19 +30,19 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
-  has_many :active_relationships, class_name: "Relationship",
-                                  foreign_key: "follower_id",
+  has_many :active_relationships, class_name: 'Relationship',
+                                  foreign_key: 'follower_id',
                                   dependent: :destroy
-  has_many :passive_relationships, class_name:  "Relationship",
-                                    foreign_key: "followed_id",
-                                    dependent:   :destroy
+  has_many :passive_relationships, class_name: 'Relationship',
+                                   foreign_key: 'followed_id',
+                                   dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   mount_uploader :avatar, AvatarUploader
   validates :name, presence: true, uniqueness: true, length: { maximum: 15 }
 
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   # ユーザーをフォローする
   def follow(other_user)
@@ -60,7 +61,7 @@ class User < ApplicationRecord
 
   # いいねしているかどうかの判定
   def already_liked?(post)
-    self.likes.exists?(post_id: post.id)
+    likes.exists?(post_id: post.id)
   end
 
   def like(post)
@@ -68,11 +69,12 @@ class User < ApplicationRecord
   end
 
   # 検索機能のスコープ
-  scope :search, -> (search_params) do
+  scope :search, lambda { |search_params|
     return if search_params.blank?
 
     name_like(search_params[:name])
-  end
-  scope :name_like, -> (name) { where('name LIKE ?', "%#{name}%") if name.present? }
-
+  }
+  scope :name_like, lambda { |name|
+                      where('name LIKE ?', "%#{name}%") if name.present?
+                    }
 end

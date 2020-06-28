@@ -5,7 +5,7 @@ RSpec.describe 'User', type: :system do
     @user = User.create(name: 'TestUser',
                         email: 'test@example.com',
                         password: 'password',
-                        confirmed_at: Date.today)
+                        confirmed_at: Time.zone.today)
   end
 
   it 'ユーザープロフィールを編集する', js: true do
@@ -22,19 +22,19 @@ RSpec.describe 'User', type: :system do
     click_link "#{@user.name}さんでログイン中"
     click_link 'マイページ'
     expect(current_path).to eq user_path(@user)
-    expect(page).to have_content "#{@user.name}"
+    expect(page).to have_content @user.name.to_s
 
     click_link 'アカウント編集'
     expect(current_path).to eq edit_user_registration_path
     expect(page).to have_content 'プロフィール編集'
 
-    attach_file 'user[avatar]', "#{Rails.root}/spec/fixtures/test.png", make_visible: true
+    attach_file 'user[avatar]', Rails.root.join('spec/fixtures/test.png'), make_visible: true
     fill_in 'ニックネーム（１５文字以内）', with: 'Modify User'
     fill_in 'メールアドレス', with: 'modify@example.com'
     click_button '更新する'
     expect(current_path).to eq user_path(@user)
     expect(page).to have_content 'アカウント情報を変更しました。'
     @user.reload
-    expect(page).to have_content "#{@user.name}"
+    expect(page).to have_content @user.name.to_s
   end
 end

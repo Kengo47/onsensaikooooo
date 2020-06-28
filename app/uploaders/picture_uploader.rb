@@ -46,7 +46,7 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   # アップロード可能な拡張子のリスト
   def extension_whitelist
-    %w(jpg jpeg png)
+    %w[jpg jpeg png]
   end
 
   # Override the filename of the uploaded files:

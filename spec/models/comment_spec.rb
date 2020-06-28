@@ -58,7 +58,7 @@ RSpec.describe Comment, type: :model do
 
   describe '文字数の検証' do
     it 'コメントが50文字以上は無効' do
-      comment.comment = "a" * 51
+      comment.comment = 'a' * 51
       expect(comment).to_not be_valid
     end
   end

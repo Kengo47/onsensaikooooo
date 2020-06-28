@@ -28,6 +28,10 @@ AsciiComments:
 Documentation:
   Enabled: false
 
+# "Line is too long"を無効
+Metrics/LineLength:
+  Enabled: false
+
 # モジュール名::クラス名の定義を許可
 ClassAndModuleChildren:
   Enabled: false
@@ -36,9 +40,19 @@ ClassAndModuleChildren:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Rails/InverseOf:
+  Enabled: false
+
+Rails/RakeEnvironment:
+  Exclude:
+    - 'lib/tasks/auto_annotate_models.rake'
+
 # default 15
 Metrics/AbcSize:
   Max: 24
 
 Metrics/MethodLength:
-  Max: 12
+  Max: 13
+
+Metrics/BlockLength:
+  Max: 200

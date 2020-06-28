@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Posts", type: :request do
-
+RSpec.describe 'Posts', type: :request do
   # describe "GET /new" do
   #   it "returns http success" do
   #     get "/posts/new"
@@ -22,5 +21,4 @@ RSpec.describe "Posts", type: :request do
   #     expect(response).to have_http_status(:success)
   #   end
   # end
-
 end

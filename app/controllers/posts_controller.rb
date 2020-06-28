@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_target_post, only: [:show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: %i[new create edit update destroy]
+  before_action :set_target_post, only: %i[show edit update destroy]
+  before_action :correct_user, only: %i[edit update destroy]
 
   def new
     @post = Post.new
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      flash[:notice] = "投稿しました！"
+      flash[:notice] = '投稿しました！'
       redirect_to @post
     else
       flash.now[:error_messages] = @post.errors.full_messages
@@ -24,12 +24,11 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-    if @post.update_attributes(post_params)
-      flash[:notice] = "更新しました！"
+    if @post.update(post_params)
+      flash[:notice] = '更新しました！'
       redirect_to @post
     else
       redirect_back fallback_location: @post, flash: {
@@ -40,14 +39,12 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    flash[:notice] = "投稿削除しました！"
+    flash[:notice] = '投稿削除しました！'
     redirect_to search_posts_url
   end
 
   def cities_select
-    if request.xhr?
-      render partial: 'cities', locals: { prefecture_id: params[:prefecture_id]}
-    end
+    render partial: 'cities', locals: { prefecture_id: params[:prefecture_id] } if request.xhr?
   end
 
   def search
@@ -61,19 +58,19 @@ class PostsController < ApplicationController
 
   private
 
-    def post_params
-      params.require(:post).permit(:name, :body, :picture, :picture_cache, :prefecture_id, :city_id, :latitude, :longitude)
-    end
+  def post_params
+    params.require(:post).permit(:name, :body, :picture, :picture_cache, :prefecture_id, :city_id, :latitude, :longitude)
+  end
 
-    def correct_user
-      redirect_back(fallback_location: user_url(current_user)) unless (@post.user == current_user) || current_user.admin?
-    end
+  def correct_user
+    redirect_back(fallback_location: user_url(current_user)) unless (@post.user == current_user) || current_user.admin?
+  end
 
-    def set_target_post
-      @post = Post.find(params[:id])
-    end
+  def set_target_post
+    @post = Post.find(params[:id])
+  end
 
-    def post_search_params
-      params.fetch(:search, {}).permit(:name, :prefecture_id, :city_id)
-    end
+  def post_search_params
+    params.fetch(:search, {}).permit(:name, :prefecture_id, :city_id)
+  end
 end

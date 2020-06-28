@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :destroy]
-  before_action :admin_user, only: [:index, :destroy]
-  before_action :set_target_user, only: [:show, :destroy]
+  before_action :authenticate_user!, only: %i[index destroy]
+  before_action :admin_user, only: %i[index destroy]
+  before_action :set_target_user, only: %i[show destroy]
 
   def index
     @search_params = user_search_params
@@ -23,15 +23,15 @@ class UsersController < ApplicationController
 
   private
 
-    def admin_user
-      redirect_back(fallback_location: user_url(current_user)) unless current_user.admin?
-    end
+  def admin_user
+    redirect_back(fallback_location: user_url(current_user)) unless current_user.admin?
+  end
 
-    def set_target_user
-      @user = User.find(params[:id])
-    end
+  def set_target_user
+    @user = User.find(params[:id])
+  end
 
-    def user_search_params
-      params.fetch(:search, {}).permit(:name)
-    end
+  def user_search_params
+    params.fetch(:search, {}).permit(:name)
+  end
 end

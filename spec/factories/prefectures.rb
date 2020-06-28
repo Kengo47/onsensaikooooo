@@ -9,6 +9,6 @@
 #
 FactoryBot.define do
   factory :prefecture do
-    name { "千葉県" }
+    name { '千葉県' }
   end
 end

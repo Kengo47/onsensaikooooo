@@ -22,6 +22,7 @@
 #
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_name                  (name) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 require 'rails_helper'
@@ -86,13 +87,13 @@ RSpec.describe User, type: :model do
 
   describe '一意性の検証' do
     it 'nameが一意でないと無効' do
-      user = create(:user, name: 'TestUser')
+      create(:user, name: 'TestUser')
       user2 = build(:user, name: 'TestUser')
       expect(user2).to_not be_valid
     end
 
     it 'emailが一意でないと無効' do
-      user = create(:user, email: 'test@example.com')
+      create(:user, email: 'test@example.com')
       user2 = build(:user, email: 'test@example.com')
       expect(user2).to_not be_valid
     end
@@ -163,7 +164,7 @@ RSpec.describe User, type: :model do
       other_user = create(:user)
       user.follow(other_user)
       expect(other_user.followers.include?(user)).to be_truthy
-      expect{ user.destroy }.to change{ other_user.followers.count }.by(-1)
+      expect { user.destroy }.to change { other_user.followers.count }.by(-1)
     end
 
     it 'ユーザーを削除すると、フォロワーのユーザーとの関係も削除される' do
@@ -171,8 +172,7 @@ RSpec.describe User, type: :model do
       other_user = create(:user)
       other_user.follow(user)
       expect(other_user.following?(user)).to be_truthy
-      expect{ user.destroy }.to change{ other_user.following.count }.by(-1)
+      expect { user.destroy }.to change { other_user.following.count }.by(-1)
     end
   end
-
 end

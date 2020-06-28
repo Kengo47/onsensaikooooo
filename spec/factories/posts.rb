@@ -29,11 +29,11 @@
 #
 FactoryBot.define do
   factory :post do
-    name { "七光台温泉" }
-    body { "地元の温泉で、最高です。" }
+    name { '七光台温泉' }
+    body { '地元の温泉で、最高です。' }
     prefecture_id { 1 }
     city_id { 1 }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.png')) }
+    picture { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.png')) }
     association :user
   end
 end

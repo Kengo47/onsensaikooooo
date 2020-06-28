@@ -22,14 +22,15 @@
 #
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_name                  (name) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 FactoryBot.define do
   factory :user do
     sequence(:name) { |n| "TserUser#{n}" }
     sequence(:email) { |n| "test-#{n}@example.com" }
-    password { "password" }
-    confirmed_at { Date.today }
+    password { 'password' }
+    confirmed_at { Time.zone.today }
 
     trait :guest do
       name     { 'Guest User' }
