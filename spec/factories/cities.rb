@@ -18,7 +18,7 @@
 #
 FactoryBot.define do
   factory :city do
-    name { "野田市" }
+    name { '野田市' }
     association :prefecture
   end
 end

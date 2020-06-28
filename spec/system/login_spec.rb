@@ -64,7 +64,7 @@ RSpec.describe 'Login', type: :system do
 
   describe 'かんたんログイン' do
     it 'ゲストユーザーのログイン成功' do
-      guest = create(:user, :guest)
+      create(:user, :guest)
 
       visit new_user_session_path
       click_button 'かんたんログイン'

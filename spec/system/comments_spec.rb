@@ -28,10 +28,10 @@ RSpec.describe 'Comment', type: :system, js: true do
 
     # コメントを削除する
     find('.comment-destroy').click
-    expect {
+    expect do
       page.accept_confirm 'コメントを削除してよろしいですか？'
       expect(page).to have_content 'まだコメントはありません...'
-    }.to change(post.comments, :count).by(-1)
+    end.to change(post.comments, :count).by(-1)
     expect(page).to_not have_content '1 つのコメント'
   end
 end

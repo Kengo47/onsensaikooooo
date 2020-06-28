@@ -8,6 +8,6 @@
 #  updated_at :datetime         not null
 #
 class Prefecture < ApplicationRecord
-  has_many :cities
-  has_many :posts
+  has_many :cities, dependent: :destroy
+  has_many :posts, dependent: :destroy
 end

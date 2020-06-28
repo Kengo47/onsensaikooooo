@@ -22,7 +22,7 @@ RSpec.describe 'Relationship', type: :system, js: true do
     click_link 'nao'
     expect(current_path).to eq user_path(nao)
 
-    #naoをkonokaがフォローする
+    # naoをkonokaがフォローする
     expect(page).to have_content 'nao'
     expect(page).to have_content '0 フォロー'
     expect(page).to have_content '0 フォロワー'
@@ -33,10 +33,10 @@ RSpec.describe 'Relationship', type: :system, js: true do
       expect(page).to have_no_button 'フォローする'
       expect(page).to have_button 'フォロー解除'
     end.to change(konoka.following, :count).by(1) &
-            change(nao.followers, :count).by(1)
+           change(nao.followers, :count).by(1)
 
     # konokaのページに移動する
-    click_link "konokaさんでログイン中"
+    click_link 'konokaさんでログイン中'
     click_link 'マイページ'
     expect(current_path).to eq user_path(konoka)
     expect(page).to have_content 'konoka'
@@ -56,10 +56,10 @@ RSpec.describe 'Relationship', type: :system, js: true do
       expect(page).to have_button 'フォローする'
       expect(page).to have_no_button 'フォロー解除'
     end.to change(konoka.following, :count).by(-1) &
-            change(nao.followers, :count).by(-1)
+           change(nao.followers, :count).by(-1)
 
     # konokaのページに移動する
-    click_link "konokaさんでログイン中"
+    click_link 'konokaさんでログイン中'
     click_link 'マイページ'
     expect(current_path).to eq user_path(konoka)
     expect(page).to have_content '0 フォロー'

@@ -20,10 +20,10 @@ RSpec.describe 'Destroy', type: :system do
       expect(page).to have_content 'アカウントの削除'
 
       click_link '削除する'
-      expect {
+      expect do
         page.accept_confirm '本当に削除しますか？'
         expect(page).to have_content 'アカウントを削除しました。またのご利用をお待ちしております。'
-      }.to change(User, :count).by(-1)
+      end.to change(User, :count).by(-1)
     end
 
     it 'ユーザー検索ページにいけない' do
@@ -78,10 +78,10 @@ RSpec.describe 'Destroy', type: :system do
 
       # 通常ユーザーに「削除する」があること
       click_link '削除する', href: "/users/#{user.id}"
-      expect {
+      expect do
         page.accept_confirm '本当に削除しますか？'
         expect(page).to have_content "「#{user.name}」を削除しました"
-      }.to change(User, :count).by(-1)
+      end.to change(User, :count).by(-1)
 
       # ゲストユーザーに「削除する」がないこと
       expect(page).to_not have_link '削除する', href: "/users/#{@guest.id}"

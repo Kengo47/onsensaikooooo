@@ -29,7 +29,7 @@ RSpec.describe 'Post', type: :system, js: true do
     fill_in '温泉の名前は？（20文字以内）', with: 'テスト温泉'
     select '千葉県', from: '都道府県'
     select '野田市', from: '市区町村'
-    attach_file 'post[picture]', "#{Rails.root}/spec/fixtures/test.png", make_visible: true
+    attach_file 'post[picture]', Rails.root.join('spec/fixtures/test.png'), make_visible: true
     fill_in 'どんな思い出？（140文字以内）', with: 'テスト温泉についてです。'
     click_button '追加！'
 
@@ -63,10 +63,10 @@ RSpec.describe 'Post', type: :system, js: true do
 
     # 投稿を削除する
     click_link '削除'
-    expect {
+    expect do
       page.accept_confirm '本当に削除して良いですか？'
       expect(page).to have_content '投稿削除しました！'
-    }.to change(Post, :count).by(-1)
+    end.to change(Post, :count).by(-1)
     expect(current_path).to eq search_posts_path
     expect(Post.where(id: post.id)).to be_empty
   end

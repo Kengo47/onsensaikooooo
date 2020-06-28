@@ -4,21 +4,21 @@ RSpec.describe 'Search', type: :system do
   let!(:user) { create(:user) }
   let!(:post_1) do
     create(:post,
-            name: '登別温泉',
-            prefecture_id: '1', # 北海道
-            city_id: '39') # 登別市
+           name: '登別温泉',
+           prefecture_id: '1', # 北海道
+           city_id: '39') # 登別市
   end
   let!(:post_2) do
     create(:post,
-            name: '七光台温泉',
-            prefecture_id: '12', # 千葉県
-            city_id: '608') # 野田市
+           name: '七光台温泉',
+           prefecture_id: '12', # 千葉県
+           city_id: '608') # 野田市
   end
   let!(:post_3) do
     create(:post,
-            name: '原鶴温泉',
-            prefecture_id: '40', # 福岡県
-            city_id: '1644') # 朝倉市
+           name: '原鶴温泉',
+           prefecture_id: '40', # 福岡県
+           city_id: '1644') # 朝倉市
   end
 
   before '投稿検索ページへ移動する' do
@@ -28,7 +28,7 @@ RSpec.describe 'Search', type: :system do
     expect(current_path).to eq search_posts_path
   end
 
-  describe '投稿を検索する', js: true  do
+  describe '投稿を検索する', js: true do
     it '名前で検索できる' do
       # 登別温泉で検索する
       fill_in '温泉の名前は？',	with: '登別温泉'

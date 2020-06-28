@@ -44,7 +44,7 @@ RSpec.describe Post, type: :model do
       name: '七光台温泉',
       prefecture: prefecture,
       city: city,
-      picture: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.png')),
+      picture: Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.png')),
       body: '最高の地元の温泉',
       user: user
     )
@@ -85,12 +85,12 @@ RSpec.describe Post, type: :model do
 
   describe '文字数の検証' do
     it '名前が20文字以上は無効' do
-      post.name = "a" * 21
+      post.name = 'a' * 21
       expect(post).to_not be_valid
     end
 
     it '思い出が140文字以上は無効' do
-      post.body = "a" * 141
+      post.body = 'a' * 141
       expect(post).to_not be_valid
     end
   end
@@ -99,7 +99,7 @@ RSpec.describe Post, type: :model do
     it '投稿をいいね/いいね解除できる' do
       konoka = create(:user)
       expect(konoka.already_liked?(post)).to be_falsey
-      konoka.like((post))
+      konoka.like(post)
       expect(konoka.already_liked?(post)).to be_truthy
     end
   end
@@ -110,17 +110,17 @@ RSpec.describe Post, type: :model do
       prefecture = create(:prefecture, name: '千葉県')
       @city = create(:city, name: '千葉県', prefecture: prefecture)
       @post = create(:post,
-                      user: user,
-                      name: '七光台温泉',
-                      prefecture: @city.prefecture,
-                      city: @city)
+                     user: user,
+                     name: '七光台温泉',
+                     prefecture: @city.prefecture,
+                     city: @city)
       other_prefecture = create(:prefecture, name: '埼玉県')
       @other_city = create(:city, name: '春日部市', prefecture: other_prefecture)
       @other_post = create(:post,
-                            user: user,
-                            name: '春日部温泉　湯楽の里',
-                            prefecture: @other_city.prefecture,
-                            city: @other_city)
+                           user: user,
+                           name: '春日部温泉　湯楽の里',
+                           prefecture: @other_city.prefecture,
+                           city: @other_city)
     end
 
     context "name: '七光台'で検索したとき、曖昧検索ができているか" do
@@ -133,7 +133,7 @@ RSpec.describe Post, type: :model do
       end
     end
 
-    context "都道府県で検索したとき、一致検索できているか" do
+    context '都道府県で検索したとき、一致検索できているか' do
       it '@postを返す' do
         expect(Post.search(prefecture_id: @city.prefecture.id)).to include(@post)
       end
@@ -143,7 +143,7 @@ RSpec.describe Post, type: :model do
       end
     end
 
-    context "都道府県、市区町村で検索したとき、一致検索できているか" do
+    context '都道府県、市区町村で検索したとき、一致検索できているか' do
       it '@postを返す' do
         expect(Post.search(prefecture_id: @city.prefecture.id, city_id: @city.id)).to include(@post)
       end
@@ -177,8 +177,8 @@ RSpec.describe Post, type: :model do
     end
 
     it '人気投稿ページ：投いいねが多い順に投稿がに並んでいること' do
-      pending "あとで追加する"
-        expect(most_liked).to eq Post.first
+      pending 'あとで追加する'
+      expect(most_liked).to eq Post.first
     end
   end
 end

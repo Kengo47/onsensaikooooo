@@ -4,13 +4,13 @@ class ApplicationController < ActionController::Base
 
   protected
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :avatar, :avatar_cache])
-    end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name avatar avatar_cache])
+  end
 
-    # ログアウト後のリダイレクト先
-    def after_sign_out_path_for(resource)
-      search_posts_path
-    end
+  # ログアウト後のリダイレクト先
+  def after_sign_out_path_for(_resource)
+    search_posts_path
+  end
 end
