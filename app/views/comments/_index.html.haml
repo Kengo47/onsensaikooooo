@@ -11,7 +11,7 @@
           - else
             = link_to image_tag("no_image.png", class: "comment-avatar"), comment.user
         .col-md-10.text-left
-          %p= link_to "@#{comment.user.name}", comment.user
+          %p.comment-user-link= link_to "@#{comment.user.name}", comment.user
           .comment-entry
             = comment.comment
             - if user_signed_in? && (comment.user == current_user || current_user.admin?)

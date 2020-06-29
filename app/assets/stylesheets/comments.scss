@@ -2,6 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@media (max-width: 767.98px) {
+  .comment-avatar {
+    text-align: center;
+  }
+  .comment-user-link {
+    text-align: center;
+  }
+  .comment-entry {
+    text-align: center;
+    word-wrap: break-word;
+  }
+}
+
 $color-main: #A1232D;
 .title-line {
   border-bottom: solid 3px gray;
