@@ -14,15 +14,51 @@ CSV.foreach('db/csv/KEN_CITY.CSV', encoding: "Shift_JIS:UTF-8") do |row|
 end
 
 # サンプルユーザーの作成
-5.times do |n|
-  User.create!(
-    email: "test#{n + 1}@test.com",
-    name: "サンプルユーザー#{n + 1}",
-    password: 'password',
-    confirmed_at: Time.now,
-    avatar: open("#{Rails.root}/db/fixtures/avatar/avatar-test#{n + 1}.png")
-  )
-end
+# 5.times do |n|
+#   User.create!(
+#     email: "test#{n + 1}@test.com",
+#     name: "サンプルユーザー#{n + 1}",
+#     password: 'password',
+#     confirmed_at: Time.now,
+#     avatar: open("#{Rails.root}/db/fixtures/avatar/avatar-test#{n + 1}.png")
+#   )
+# end
+# 隠し推しメン
+User.create!(
+  email: "test1@test.com",
+  name: "田村　まゆ",
+  password: 'password',
+  confirmed_at: Time.now,
+  avatar: open("#{Rails.root}/db/fixtures/avatar/avatar-test.png")
+)
+User.create!(
+  email: "test2@test.com",
+  name: "樋口　ひな",
+  password: 'password',
+  confirmed_at: Time.now,
+  avatar: open("#{Rails.root}/db/fixtures/avatar/avatar-test.png")
+)
+User.create!(
+  email: "test3@test.com",
+  name: "松田　このか",
+  password: 'password',
+  confirmed_at: Time.now,
+  avatar: open("#{Rails.root}/db/fixtures/avatar/avatar-test.png")
+)
+User.create!(
+  email: "test4@test.com",
+  name: "河田　ひな",
+  password: 'password',
+  confirmed_at: Time.now,
+  avatar: open("#{Rails.root}/db/fixtures/avatar/avatar-test.png")
+)
+User.create!(
+  email: "test5@test.com",
+  name: "小坂　なお",
+  password: 'password',
+  confirmed_at: Time.now,
+  avatar: open("#{Rails.root}/db/fixtures/avatar/avatar-test.png")
+)
 
 # かんたんログイン用ユーザーの作成
 User.create!(name: "Guest User",
