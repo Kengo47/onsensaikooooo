@@ -20,8 +20,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
+  default_scope -> { order(created_at: :desc) }
   belongs_to :user
   belongs_to :post
-  default_scope -> { order(created_at: :desc) }
+  has_many :notifications, dependent: :destroy
   validates :comment, presence: true, length: { maximum: 50 }
 end
