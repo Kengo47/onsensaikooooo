@@ -10,6 +10,8 @@ jobs:
           MYSQL_PASSWORD: ''
           MYSQL_PORT: 3306
       - image: circleci/mysql:5.7
+        command:
+          - --sql-mode=NO_ENGINE_SUBSTITUTION
         environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: true
           MYSQL_ROOT_PASSWORD: ''
