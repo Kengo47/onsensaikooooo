@@ -17,4 +17,5 @@
     = render partial: 'posts/posts_index', locals: { posts: posts }
 
   #tab3.tab-pane
+    %p.home-text.mt-3.mb-3  投稿された都道府県の割合（TOP10）
     = pie_chart @chart
