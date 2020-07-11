@@ -52,6 +52,8 @@ https://onseeeeen.com/
 - 検索機能
   - 投稿を複数の検索条件を指定可能
   - ユーザーを名前で検索機能
+- 通知機能
+  - ユーザーをフォロー、投稿をお気に入り、投稿へコメントした際に通知を表示
 - 管理ユーザー機能
   - ユーザー一覧の表示、一般ユーザーのアカウントや投稿、コメントを削除可能
 - RSpecによる自動テスト機能
@@ -62,4 +64,4 @@ https://onseeeeen.com/
     - 都道府県SelectBoxに対する市区町村SelectBoxをAjaxで動的に制御
 
 ## ER図
-![onseeeeen-er](https://user-images.githubusercontent.com/64575727/86100279-97833880-baf3-11ea-8921-741787da708b.jpg)
+![onseeeeen-er2](https://user-images.githubusercontent.com/64575727/87219975-ec983780-c39a-11ea-9b91-dc6c6c27b7eb.jpg)

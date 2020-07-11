@@ -11,17 +11,17 @@
 
       - case notification.action
       - when 'follow' then
-        = 'あなたをフォローしました'
+        = 'あなたをフォローしました！'
       - when 'like' then
         = link_to 'あなたの投稿', notification.post, style: 'font-weight-bold;'
-        にいいねしました
+        をお気に入りしました！
       - when 'comment' then
         - if notification.post.user_id == visited.id
           = link_to 'あなたの投稿', notification.post, style: 'font-weight-bold;'
         - else
           %span
             = link_to "#{notification.post.user.name}さんの投稿", post_path(notification.post)
-        にコメントしました
+        にコメントしました！
         %p.text-muted.mb-0
           = Comment.find_by(id: notification.comment_id)&.comment
   .small.text-muted.text-right
