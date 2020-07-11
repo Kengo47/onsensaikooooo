@@ -38,6 +38,12 @@ class User < ApplicationRecord
                                    dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :active_notifications, class_name: 'Notification',
+                                  foreign_key: 'visitor_id',
+                                  dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification',
+                                   foreign_key: 'visited_id',
+                                   dependent: :destroy
   mount_uploader :avatar, AvatarUploader
   validates :name, presence: true, uniqueness: true, length: { maximum: 15 }
 
@@ -66,6 +72,17 @@ class User < ApplicationRecord
 
   def like(post)
     likes.find_or_create_by(post_id: post.id)
+  end
+
+  def create_notification_follow(current_user)
+    temp = Notification.where(['visitor_id = ? and visited_id = ? and action = ?', current_user.id, id, 'follow'])
+    return if temp.present?
+
+    notification = current_user.active_notifications.new(
+      visited_id: id,
+      action: 'follow'
+    )
+    notification.save if notification.valid?
   end
 
   # 検索機能のスコープ

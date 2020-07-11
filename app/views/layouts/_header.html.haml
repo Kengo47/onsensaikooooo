@@ -20,6 +20,14 @@
 
     %ul.navbar-nav
       - if user_signed_in?
+        %li.nav-item
+          = link_to notifications_path, class: "nav-link" do
+            - if unchecked_notifications.any?
+              %span.fa-stack
+                %i.fas.fa-bell.fa-stack-1x
+                %i.fas.fa-circle.n-circle.fa-stack-1x
+            - else
+              %i.fas.fa-bell
         %li.dropdown
           = link_to "#{current_user.name}さんでログイン中", "#", { class: "dropdown-toggle nav-link", data: { toggle: "dropdown" }, role: "button" }
           %ul.dropdown-menu{ role: "menu" }
